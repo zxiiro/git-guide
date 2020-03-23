@@ -22,3 +22,8 @@ Glossary
         Represents the state of files in a directory. Can contain
         :term:`Blob objects <Blob object>` and
         :term:`Tree objects <Tree object>`.
+
+    Worktree
+        A directory containing the checked out files from a Git repository.
+        This is typically where you modify and update files before checking
+        in your changes to the Git repo.

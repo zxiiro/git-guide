@@ -22,4 +22,5 @@ newbies as well as veterans of Git.
 
     building-blocks
     commit-msg
+    dev-lifecycle
     glossary
