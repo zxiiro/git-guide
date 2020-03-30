@@ -21,6 +21,6 @@ newbies as well as veterans of Git.
     :maxdepth: 2
 
     building-blocks
-    commit-msg
+    commit-objects
     dev-lifecycle
     glossary
