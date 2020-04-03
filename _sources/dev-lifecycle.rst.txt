@@ -24,6 +24,125 @@ Topics:
   * git tag
 
 
+Viewing Commits
+---------------
+
+git status
+^^^^^^^^^^
+
+The ``git status`` command is a useful command for showing the current state
+of your Git directory. Showing the relation between your :term:`Worktree`.
+
+
+**git status: brand new repo**
+
+.. code-block:: none
+
+    On branch master
+
+    No commits yet
+
+    nothing to commit (create/copy files and use "git add" to track)
+
+
+**git status: clean worktree**
+
+.. code-block:: none
+
+    On branch master
+    nothing to commit, working tree clean
+
+
+**git status: untracked file**
+
+.. code-block:: none
+
+    On branch master
+    Untracked files:
+      (use "git add <file>..." to include in what will be committed)
+
+        abc
+
+    nothing added to commit but untracked files present (use "git add" to track)
+
+
+**git status: modified file**
+
+.. code-block:: none
+
+    On branch master
+    Changes not staged for commit:
+      (use "git add <file>..." to update what will be committed)
+      (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   test
+
+    no changes added to commit (use "git add" and/or "git commit -a")
+
+
+**git status: staged file**
+
+.. code-block:: none
+
+    On branch master
+    Changes to be committed:
+      (use "git reset HEAD <file>..." to unstage)
+
+        new file:   abc
+
+
+git log
+^^^^^^^
+
+The ``git log`` command is useful for inspecting the branch history.
+This command unfortunately is only as useful as participants on the project
+make it. See :ref:`commit-msg:The importance of a Commit Message` for best
+practices on managing your commit message.
+
+Check the log of the projects you work on often and try to see if you can
+understand the progress of the project from the log. Use the following log
+commands and explore the differences:
+
+* git log
+* git shortlog
+* git log 1.0.0..2.0.0
+
+Many Git commands support passing a commit range to tell Git to show you what
+changes are in the 2nd reference point that's not in the 1st reference point.
+What Git is doing in this case is taking the 2 commits as a starting point,
+then walk through the commit history looking for a common ancestor or parent
+commit. Then it uses the commit parent as the starting point of history and
+returning the results from the parent commit until the 2nd reference point.
+
+Try reversing the 2 reference points and see how the log changes.
+
+
+git diff
+^^^^^^^^
+
+The ``git diff`` command is useful for checking out what changed between 2
+commit points. Try the following:
+
+* git diff
+* git diff HEAD~1
+* git diff origin/master
+* git diff BranchA BranchB
+
+
+gitk
+^^^^
+
+This is the default Git GUI that comes with standard Git. It's a powerful
+GUI based viewer to allow you to see the state of the local Git repo. It's
+a combination of ``git log`` and ``git diff`` put together into a single
+easy to navigate viewer.
+
+.. figure:: img/gitk.png
+   :alt: gitk
+
+   gitk - Graphical history viewer
+
+
 Worktree management
 -------------------
 

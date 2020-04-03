@@ -38,7 +38,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Glossary" href="glossary.html" />
-    <link rel="prev" title="Deeper look into commits" href="commit-msg.html" /> 
+    <link rel="prev" title="The importance of a Commit Message" href="commit-msg.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,18 +88,18 @@
 <li class="toctree-l2"><a class="reference internal" href="building-blocks.html#git-building-blocks-key-takeaways">Git Building Blocks: Key Takeaways</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="commit-msg.html">Deeper look into commits</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="commit-msg.html">The importance of a Commit Message</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="commit-msg.html#rules-of-a-great-commit-message">7 rules of a great commit message</a></li>
 <li class="toctree-l2"><a class="reference internal" href="commit-msg.html#commit-message-footer">Commit message footer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="commit-msg.html#signed-off-by">Signed-off-by</a></li>
 <li class="toctree-l2"><a class="reference internal" href="commit-msg.html#poor-man-s-automated-release-notes">Poor man’s automated release notes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="commit-msg.html#troubleshooting-and-debugging">Troubleshooting and debugging</a></li>
-<li class="toctree-l2"><a class="reference internal" href="commit-msg.html#tools-for-commit-review">Tools for commit review</a></li>
 <li class="toctree-l2"><a class="reference internal" href="commit-msg.html#demo-committing-and-amending">Demo: Committing and amending</a></li>
 <li class="toctree-l2"><a class="reference internal" href="commit-msg.html#commit-mesages-key-takeaways">Commit Mesages: Key Takeaways</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Development lifecycle: Branches and Tags</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#viewing-commits">Viewing Commits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#worktree-management">Worktree management</a></li>
 </ul>
 </li>
@@ -168,7 +168,7 @@
         <a href="glossary.html" class="btn btn-neutral float-right" title="Glossary" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="commit-msg.html" class="btn btn-neutral float-left" title="Deeper look into commits" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="commit-msg.html" class="btn btn-neutral float-left" title="The importance of a Commit Message" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
   </div>
   
@@ -204,6 +204,100 @@
 </ul>
 </li>
 </ul>
+<div class="section" id="viewing-commits">
+<h2>Viewing Commits<a class="headerlink" href="#viewing-commits" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="git-status">
+<h3>git status<a class="headerlink" href="#git-status" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> command is a useful command for showing the current state
+of your Git directory. Showing the relation between your <a class="reference internal" href="glossary.html#term-worktree"><span class="xref std std-term">Worktree</span></a>.</p>
+<p><strong>git status: brand new repo</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>On branch master
+
+No commits yet
+
+nothing to commit (create/copy files and use &quot;git add&quot; to track)
+</pre></div>
+</div>
+<p><strong>git status: clean worktree</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>On branch master
+nothing to commit, working tree clean
+</pre></div>
+</div>
+<p><strong>git status: untracked file</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>On branch master
+Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+
+    abc
+
+nothing added to commit but untracked files present (use &quot;git add&quot; to track)
+</pre></div>
+</div>
+<p><strong>git status: modified file</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>On branch master
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+
+    modified:   test
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</pre></div>
+</div>
+<p><strong>git status: staged file</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>On branch master
+Changes to be committed:
+  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)
+
+    new file:   abc
+</pre></div>
+</div>
+</div>
+<div class="section" id="git-log">
+<h3>git log<a class="headerlink" href="#git-log" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> command is useful for inspecting the branch history.
+This command unfortunately is only as useful as participants on the project
+make it. See <a class="reference internal" href="commit-msg.html#the-importance-of-a-commit-message"><span class="std std-ref">The importance of a Commit Message</span></a> for best
+practices on managing your commit message.</p>
+<p>Check the log of the projects you work on often and try to see if you can
+understand the progress of the project from the log. Use the following log
+commands and explore the differences:</p>
+<ul class="simple">
+<li><p>git log</p></li>
+<li><p>git shortlog</p></li>
+<li><p>git log 1.0.0..2.0.0</p></li>
+</ul>
+<p>Many Git commands support passing a commit range to tell Git to show you what
+changes are in the 2nd reference point that’s not in the 1st reference point.
+What Git is doing in this case is taking the 2 commits as a starting point,
+then walk through the commit history looking for a common ancestor or parent
+commit. Then it uses the commit parent as the starting point of history and
+returning the results from the parent commit until the 2nd reference point.</p>
+<p>Try reversing the 2 reference points and see how the log changes.</p>
+</div>
+<div class="section" id="git-diff">
+<h3>git diff<a class="headerlink" href="#git-diff" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> command is useful for checking out what changed between 2
+commit points. Try the following:</p>
+<ul class="simple">
+<li><p>git diff</p></li>
+<li><p>git diff HEAD~1</p></li>
+<li><p>git diff origin/master</p></li>
+<li><p>git diff BranchA BranchB</p></li>
+</ul>
+</div>
+<div class="section" id="gitk">
+<h3>gitk<a class="headerlink" href="#gitk" title="Permalink to this headline">¶</a></h3>
+<p>This is the default Git GUI that comes with standard Git. It’s a powerful
+GUI based viewer to allow you to see the state of the local Git repo. It’s
+a combination of <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> put together into a single
+easy to navigate viewer.</p>
+<div class="figure align-default" id="id1">
+<img alt="gitk" src="_images/gitk.png" />
+<p class="caption"><span class="caption-text">gitk - Graphical history viewer</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
 <div class="section" id="worktree-management">
 <h2>Worktree management<a class="headerlink" href="#worktree-management" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="gitignore">
@@ -290,7 +384,7 @@ track.</p>
         <a href="glossary.html" class="btn btn-neutral float-right" title="Glossary" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="commit-msg.html" class="btn btn-neutral float-left" title="Deeper look into commits" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="commit-msg.html" class="btn btn-neutral float-left" title="The importance of a Commit Message" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
