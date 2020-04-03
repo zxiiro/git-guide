@@ -397,8 +397,8 @@ Imagine you are working on a document in your favourite office suite on an
 important document, how often do you press the save button? You should be
 running ``git commit`` just as often.
 
-Continuing from the :ref:`git add` section previously we can commit our
-``README``.
+Continuing from the :ref:`building-blocks:git add` section previously we can
+commit our ``README``.
 
 .. code-block:: bash
     :caption: Demo: git commit

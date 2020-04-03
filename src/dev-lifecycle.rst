@@ -96,8 +96,8 @@ git log
 
 The ``git log`` command is useful for inspecting the branch history.
 This command unfortunately is only as useful as participants on the project
-make it. See :ref:`The importance of a Commit Message` for best practices
-on managing your commit message.
+make it. See :ref:`commit-msg:The importance of a Commit Message` for best
+practices on managing your commit message.
 
 Check the log of the projects you work on often and try to see if you can
 understand the progress of the project from the log. Use the following log
@@ -152,11 +152,11 @@ Worktree management
 The ``.gitignore`` file is a special file that can be checked into your Git
 repo to tell the Git client to ignore **tracking** certain files.
 
-As mentioned in the :ref:`Local Repository` section there is also a
-``.git/info/excludes`` file which can also be used to ignore files however
-this file is not shared in Git so any changes here will only affect your
-local work. Typically folks will use ``.gitignore`` as it can be shared with
-the team.
+As mentioned in the :ref:`building-blocks:Local Repository` section there is
+also a ``.git/info/excludes`` file which can also be used to ignore files
+however this file is not shared in Git so any changes here will only affect
+your local work. Typically folks will use ``.gitignore`` as it can be shared
+with the team.
 
 One point of confusion for many folks with ``.gitignore`` is the idea of
 **tracking** files. This means Git will only ignore the file if it is not yet

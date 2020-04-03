@@ -22,13 +22,13 @@ Topics:
 The below discussion references
 https://chris.beams.io/posts/git-commit/#seven-rules
 
-1. :ref:`Separate subject from body with a blank line`
-2. :ref:`Limit the subject line to 50 characters`
-3. :ref:`Capitalize the subject line`
-4. :ref:`Do not end the subject line with a period`
-5. :ref:`Use the imperative mood in the subject line`
-6. :ref:`Wrap the body at 72 characters`
-7. :ref:`Use the body to explain what and why vs. how`
+1. :ref:`commit-msg:Separate subject from body with a blank line`
+2. :ref:`commit-msg:Limit the subject line to 50 characters`
+3. :ref:`commit-msg:Capitalize the subject line`
+4. :ref:`commit-msg:Do not end the subject line with a period`
+5. :ref:`commit-msg:Use the imperative mood in the subject line`
+6. :ref:`commit-msg:Wrap the body at 72 characters`
+7. :ref:`commit-msg:Use the body to explain what and why vs. how`
 
 .. code-block:: none
 
@@ -104,9 +104,10 @@ Do not end the subject line with a period
 Use the imperative mood in the subject line
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In support of the rule to :ref:`Limit the subject line to 50 characters` since
-we don't have a lot of character space using imperative mood saves us some
-precious character space.
+In support of the rule to
+:ref:`commit-msg:Limit the subject line to 50 characters` since we don't have
+a lot of character space using imperative mood saves us some precious
+character space.
 
 ``Update lint configuration for Molecule v3`` is better than
 ``Updated lint configuration for Molecule v3``.

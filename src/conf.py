@@ -25,3 +25,5 @@ html_theme_options = {
     'includehidden': True,
     'titles_only': False
 }
+
+autosectionlabel_prefix_document = True
