@@ -1,0 +1,760 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The building blocks of Git &mdash; Git - a follow along guide  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://www.zxiiro.ca/git-guidebuilding-blocks.html"/>
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Deeper look into commits" href="commit-msg.html" />
+    <link rel="prev" title="Git, a follow along guide" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Git - a follow along guide
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The building blocks of Git</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview-of-the-git-directory">Overview of the Git directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-git-object-model">The Git Object Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#demo-working-with-the-git-directory">Demo: Working with the Git Directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#demo-working-with-multiple-worktrees">Demo: Working with multiple Worktrees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#git-building-blocks-key-takeaways">Git Building Blocks: Key Takeaways</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="commit-msg.html">Deeper look into commits</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="commit-msg.html#rules-of-a-great-commit-message">7 rules of a great commit message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-msg.html#commit-message-footer">Commit message footer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-msg.html#signed-off-by">Signed-off-by</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-msg.html#poor-man-s-automated-release-notes">Poor man’s automated release notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-msg.html#troubleshooting-and-debugging">Troubleshooting and debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-msg.html#tools-for-commit-review">Tools for commit review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-msg.html#demo-committing-and-amending">Demo: Committing and amending</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-msg.html#commit-mesages-key-takeaways">Commit Mesages: Key Takeaways</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dev-lifecycle.html">Development lifecycle: Branches and Tags</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dev-lifecycle.html#worktree-management">Worktree management</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Git - a follow along guide</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>The building blocks of Git</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/building-blocks.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="commit-msg.html" class="btn btn-neutral float-right" title="Deeper look into commits" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Git, a follow along guide" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-building-blocks-of-git">
+<h1>The building blocks of Git<a class="headerlink" href="#the-building-blocks-of-git" title="Permalink to this headline">¶</a></h1>
+<p>Topics:</p>
+<ul class="simple">
+<li><p>The Git directory</p>
+<ul>
+<li><p>Local Repository</p></li>
+<li><p>Worktree (Working Directory)</p></li>
+<li><p>Staging Area (Index)</p></li>
+</ul>
+</li>
+<li><p>The Git Object Model</p>
+<ul>
+<li><p>Commit</p></li>
+<li><p>Trees</p></li>
+<li><p>Blobs</p></li>
+<li><p>Tags</p></li>
+</ul>
+</li>
+<li><p>Demo: Working with the Git directory</p>
+<ul>
+<li><p>git init</p></li>
+<li><p>git add</p></li>
+<li><p>git commit</p></li>
+<li><p>git checkout</p></li>
+</ul>
+</li>
+<li><p>Demo: Working with multiple Worktrees</p></li>
+<li><p>Git Fundamentals: Key Takeaways</p></li>
+</ul>
+<div class="section" id="overview-of-the-git-directory">
+<h2>Overview of the Git directory<a class="headerlink" href="#overview-of-the-git-directory" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-default" id="id1">
+<img alt="Worktree | Staging Area | Local Repository" src="_images/git-directory-1.png" />
+<p class="caption"><span class="caption-text">Worktree | Staging Area | Local Repository</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<p>A directory containing a Git repo can contains 3 important parts:</p>
+<ol class="arabic simple">
+<li><p>Worktree (Working directory)</p></li>
+<li><p>Staging Area</p></li>
+<li><p>Local Repository</p></li>
+</ol>
+<p>It is really difficult for a new user to effectively use Git until they
+understand the difference between these 3 components.</p>
+<div class="section" id="local-repository">
+<h3>Local Repository<a class="headerlink" href="#local-repository" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">.git</span></code> directory contains the Git configuration and database. When
+you’re talking about a Git repository, this is the repository itself.</p>
+<p>Contents:</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">ls .git</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>HEAD
+config
+description
+hooks
+info
+objects
+refs
+</pre></div>
+</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">HEAD</dt>
+<dd class="field-odd"><p>Contains the active checkout of your current workspace.</p>
+</dd>
+<dt class="field-even">config</dt>
+<dd class="field-even"><p>Contains your local git configuration.</p>
+</dd>
+<dt class="field-odd">description</dt>
+<dd class="field-odd"><p>Only locally significant and allows you to give your Git repo a
+name. Typically not used by users, it’s mostly for server use.</p>
+</dd>
+<dt class="field-even">hooks</dt>
+<dd class="field-even"><p>Contains scripts that can be run automatically upon certain git
+actions. Commonly <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> is used for things like automated linting
+and testing client-side before pushing to a remote repository for CI.</p>
+</dd>
+<dt class="field-odd">info</dt>
+<dd class="field-odd"><p>Contains an <code class="docutils literal notranslate"><span class="pre">excludes</span></code> file which is similar to <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>
+except it is unversioned. Useful if you want to ignore things that are only
+significant to you and no one else (such as maybe you use a different IDE
+then everyone else and don’t want to pollute .gitignore with your snowflake
+environmnet). Otherwise it’s better to use <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> in most cases.</p>
+</dd>
+<dt class="field-even">objects</dt>
+<dd class="field-even"><p>Contains the Git <strong>object database</strong> itself. It is a key-value store
+and every single file you check into git exists here. This is where git
+pulls the files from when you do a <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span></code>. Every file is a SHA
+hash.</p>
+</dd>
+<dt class="field-odd">refs</dt>
+<dd class="field-odd"><p>Contains all of your references, you might know them as branches,
+tags, commits… They are essentially a bunch of SHA hashes.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="worktree-working-directory">
+<h3>Worktree (Working directory)<a class="headerlink" href="#worktree-working-directory" title="Permalink to this headline">¶</a></h3>
+<p>The worktree or working directory is where all your untracked files and work
+in progress files are. When you do a <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span></code> you are telling Git to
+copy files from the Git repository to this working area so that you can work
+on them. The files are checked out in the state (or snapshot) at the reference
+point you pass to the Git command.</p>
+<p>For example <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">master</span></code> tells Git to fetch all the files from the
+<strong>master</strong> revision and make sure the worktree’s copy of all the files are
+up to date with what’s in the branch.</p>
+</div>
+<div class="section" id="staging-area-index">
+<h3>Staging Area (Index)<a class="headerlink" href="#staging-area-index" title="Permalink to this headline">¶</a></h3>
+<p>The Staging area or Index is the area between your <strong>Local Repository</strong> and
+your <strong>Worktree</strong>. You use this area to build up a set of changes that you
+want to commit together.</p>
+</div>
+</div>
+<div class="section" id="the-git-object-model">
+<h2>The Git Object Model<a class="headerlink" href="#the-git-object-model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="the-sha">
+<h3>The SHA<a class="headerlink" href="#the-sha" title="Permalink to this headline">¶</a></h3>
+<p>Before we can get to the objects, it is important to understand that every Git
+object is represented as a SHA1 hash in the Git database.</p>
+<p>Everything in Git is represented by a 40 character SHA1 hash that looks
+something like this <code class="docutils literal notranslate"><span class="pre">557db03de997c86a4a028e1ebd3a1ceb225be238</span></code> (This is
+‘Hello World’). This is the object name (or key in a key-value store) that Git
+will use to store your contents into the <a class="reference internal" href="glossary.html#term-object-database"><span class="xref std std-term">Object database</span></a>.</p>
+<p>Since SHA1 hashes are always computed exactly the same on every system, this
+guarentees that the same contents are always stored with the same name in the
+database and duplicate files are never stored in a Git repo.</p>
+</div>
+<div class="section" id="blob-object">
+<h3>Blob object<a class="headerlink" href="#blob-object" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-default" id="id3">
+<img alt="Blob object" src="_images/git-object-blob.png" />
+<p class="caption"><span class="caption-text">Blob object</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<p>A Blob object contains the complete contents of a file.</p>
+<p>As mentioned previously, all Git objects are stored via SHA1 hash so 2 files
+with the identical contents gets stored in the <a class="reference internal" href="glossary.html#term-object-database"><span class="xref std std-term">Object database</span></a> as the
+same exact same Blob object so there can be no duplicate files.</p>
+<p>Another thing you may notice as we go through this guide is that Git always
+stores the complete contents of files into Blobs, but when you look at a Git
+commit using <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> or any tools to show the commit you will see what
+changed in the file instead. What Git’s doing in the background is comparing
+any Blob objects that changed in a commit with the previous Blob object that
+it replaced.</p>
+</div>
+<div class="section" id="tree-object">
+<h3>Tree object<a class="headerlink" href="#tree-object" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-default" id="id4">
+<img alt="Tree object" src="_images/git-object-tree.png" />
+<p class="caption"><span class="caption-text">Tree object</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<p>A Tree object contains the complete contents of a directory.</p>
+<p>It can contain additonal Tree objects and Blob objects. If you follow a tree
+all the way down the final tree will only contain Blob objects, this is why
+you cannot store just an empty directory in Git.</p>
+<p>In other words, a Tree does not just contain the files that changed but
+actually contains a list of all the files that currently exist at that
+particular point in time.</p>
+</div>
+<div class="section" id="commit-object">
+<h3>Commit object<a class="headerlink" href="#commit-object" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-default" id="id5">
+<img alt="Commit object" src="_images/git-object-commit.png" />
+<p class="caption"><span class="caption-text">Commit object</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<p>A Commit object represents a particular point in time in the Git timeline.
+It contains a tree, parent, author, committer, and commit message.</p>
+<p>This is the object folks generally interact with the most in Git. You can
+think of it as kind of an email. If you can imagine:</p>
+<ul class="simple">
+<li><p>The Tree is your attachments</p></li>
+<li><p>The commit message is your Subject line as well as email Body</p></li>
+<li><p>The rest of the info is metadata to describe where the commit came from</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>While the <strong>author</strong> and <strong>committer</strong> timestamps iare generated the first
+time a commit is created. The <strong>committer</strong> timestamp is updated every
+time <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">--amend</span></code> is run.
+This is part of the reason why the commit SHA changes on ever amend.</p>
+</div>
+</div>
+<div class="section" id="tag-object">
+<h3>Tag object<a class="headerlink" href="#tag-object" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-default" id="id6">
+<img alt="Commit object" src="_images/git-object-tag.png" />
+<p class="caption"><span class="caption-text">Tag object</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+<p>A Tag object contains supporting metadata and reference to a
+<a class="reference internal" href="glossary.html#term-commit-object"><span class="xref std std-term">Commit object</span></a>.</p>
+<p>Tags are typically used for for things like releases to provide a pointer back
+to the original codebase that produced a release. It can also be used to share
+interesting points in time in a codebase.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You may have noticed that branches are not a basic building block of Git.
+We’ll explore this further later on.</p>
+</div>
+</div>
+<div class="section" id="git-objects-full-example">
+<h3>Git Objects Full Example<a class="headerlink" href="#git-objects-full-example" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-default" id="id7">
+<img alt="Git Objects Full Example" src="_images/git-objects-example.png" />
+<p class="caption"><span class="caption-text">Git Objects Full Example</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+<p>From here we can see how all the 4 Git Object types interact with each other:</p>
+<ul class="simple">
+<li><p>A Tag references a particular commit</p></li>
+<li><p>A Commit references both a parent commit and a Tree</p></li>
+<li><p>A Tree can reference another Tree as well as a Blob</p></li>
+<li><p>2 files can also reference the same Blob</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="demo-working-with-the-git-directory">
+<h2>Demo: Working with the Git Directory<a class="headerlink" href="#demo-working-with-the-git-directory" title="Permalink to this headline">¶</a></h2>
+<p>Before we start there are a few low level commands we’ll be using throughout
+this guide to explore the Git database. You do not need to remember these
+commands as they are not typically used in everyday Git use but are
+useful for exploring the Git database.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git cat-file -t &lt;hash&gt;
+git cat-file -p &lt;hash&gt;
+<span class="nb">echo</span> <span class="s1">&#39;Hello World&#39;</span> <span class="p">|</span> git hash-object
+git hash-object /path/to/file
+</pre></div>
+</div>
+<div class="section" id="git-init">
+<h3>git init<a class="headerlink" href="#git-init" title="Permalink to this headline">¶</a></h3>
+<p>A new git repo can be initialized with the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> command.</p>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir demo
+<span class="nb">cd</span> demo
+git init
+ls -la
+</pre></div>
+</div>
+<p>It will create a single directory in the repo named <code class="docutils literal notranslate"><span class="pre">.git</span></code> containing the
+<strong>Local Repository</strong> and an empty <strong>Worktree</strong>. The contents of a fresh
+<code class="docutils literal notranslate"><span class="pre">.git</span></code> directory is as follows:</p>
+<div class="literal-block-wrapper docutils container" id="find-dot-git">
+<div class="code-block-caption"><span class="caption-text">find .git</span><a class="headerlink" href="#find-dot-git" title="Permalink to this code">¶</a></div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>.git
+<span class="hll">.git/config
+</span><span class="hll">.git/objects
+</span>.git/objects/pack
+.git/objects/info
+<span class="hll">.git/HEAD
+</span>.git/info
+.git/info/exclude
+.git/description
+.git/hooks
+.git/hooks/commit-msg.sample
+.git/hooks/pre-rebase.sample
+.git/hooks/pre-commit.sample
+.git/hooks/applypatch-msg.sample
+.git/hooks/fsmonitor-watchman.sample
+.git/hooks/pre-receive.sample
+.git/hooks/prepare-commit-msg.sample
+.git/hooks/post-update.sample
+.git/hooks/pre-applypatch.sample
+.git/hooks/pre-push.sample
+.git/hooks/update.sample
+<span class="hll">.git/refs
+</span><span class="hll">.git/refs/heads
+</span><span class="hll">.git/refs/tags
+</span></pre></div>
+</div>
+</div>
+<p>Throughout this guide we will be monitoriing changes to the highlighted parts
+of the repo to see how commands affect changes to the <strong>Local Repository</strong>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat .git/config
+cat .git/HEAD
+find .git/objects
+find .git/refs/heads
+find .git/refs/tags
+</pre></div>
+</div>
+<p>The only file so far is <code class="docutils literal notranslate"><span class="pre">.git/config</span></code> which isn’t too interesting just yet
+and <code class="docutils literal notranslate"><span class="pre">.git/HEAD</span></code> contains a reference to <code class="docutils literal notranslate"><span class="pre">refs/heads/master</span></code> which does
+not yet exist.</p>
+</div>
+<div class="section" id="git-add">
+<h3>git add<a class="headerlink" href="#git-add" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> command is used to stage files for committing into the Git
+database. The area where files are staged is referred to as the <strong>Git Index</strong>
+(or Staging Area). The easiest way to look at the <strong>Git Index</strong> is to use
+the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> command.</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">Demo: git add</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
+touch README
+
+git status
+git add README
+
+git status
+find .git/objects
+
+<span class="nb">echo</span> <span class="s1">&#39;Hello World&#39;</span> <span class="p">|</span> git hash-object --stdin
+<span class="nb">echo</span> <span class="s1">&#39;Hello World&#39;</span> &gt; README
+
+git status
+git diff
+git add README
+
+git status
+find .git/objects
+
+git cat-file -p 557d
+</pre></div>
+</div>
+</div>
+<p>With the understanding that <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> is used to stage commits. We should
+try to be precise in our use of the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> command. Many newbies to Git
+tend to use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">.</span></code> which effectively means please stage everything in
+my current directory and down. Often newbies get confused when they
+unintentionally pull in changes that they did not make. Instead you should
+always use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">/path/to/file</span></code> and select explicitly which files you
+intend to commit rather than committing everything.</p>
+<p>The commands <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> can be used to review file
+changes before <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">/path/to/file</span></code> to stage the commit so that we can
+be precise in our staging.</p>
+<p>In a more advanced example <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">-p</span> <span class="pre">/path/to/file</span></code> can be used to select
+specific changes inside of a single file for staging.</p>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">Demo: git add -p</span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
+vi README  <span class="c1"># Prepend a header and append a footer.</span>
+
+git status
+git diff
+git add -p README
+
+<span class="c1"># Split, and stage only the header.</span>
+
+git status
+git diff
+find .git/objects
+git cat-file &lt;SHA&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="git-commit">
+<h3>git commit<a class="headerlink" href="#git-commit" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> command is used to checkin your work to your
+<strong>Local Repository</strong>. This is probably the most important command in Git and
+is one of the main commands of Git.</p>
+<p>If your work is not committed, it effectively does not exist. One way to think
+of committing is to think of it as <strong>saving</strong> your work. You should do this
+regularly and often as you work on your task.</p>
+<p>Imagine you are working on a document in your favourite office suite on an
+important document, how often do you press the save button? You should be
+running <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> just as often.</p>
+<p>Continuing from the <a class="reference internal" href="#git-add"><span class="std std-ref">git add</span></a> section previously we can
+commit our <code class="docutils literal notranslate"><span class="pre">README</span></code>.</p>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text">Demo: git commit</span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
+git commit
+
+cat .git/refs/heads/master
+
+git status
+git diff
+find .git/objects
+
+<span class="c1"># Looks look at the tree and commit objects</span>
+git cat-file -t &lt;SHA&gt;
+git cat-file -p &lt;SHA&gt;
+</pre></div>
+</div>
+</div>
+<p>After committing <code class="docutils literal notranslate"><span class="pre">refs/heads/master</span></code> now exists and points to the latest
+commit SHA that was just created.</p>
+<p>Notice that a new Blob object is not created. The Blob object created when
+we staged the file results in the same Blob object so the commit just reuses
+the existing one when it creates the Tree object.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We will discuss the importance of the <strong>Commit Message</strong> in the next
+chapter.</p>
+</div>
+<p>Since this is the first commit, there is no parent commit so let’s create
+another commit so that we can see the parent.</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-text">Demo: git commit with parent</span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
+git diff
+git add README
+git commit README
+
+cat .git/refs/heads/master
+
+git status
+find .git/objects
+
+git cat-file -t &lt;SHA&gt;
+git cat-file -p &lt;SHA&gt;
+</pre></div>
+</div>
+</div>
+<p>Notice that <code class="docutils literal notranslate"><span class="pre">refs/heads/master</span></code> has moved forward to a new commit SHA.</p>
+<p>Notice that this new commit has a parent. So when you share this commit with
+others (like pushing a git commit to a remote repository) this commit will
+always be based against this parent so when a remote repository merges this
+commit it will be merged against this parent in the Git timeline.</p>
+<p><strong>git commit –amend</strong></p>
+<p>As mentioned previously it is good practice to commit often to save your work,
+of course if you do this you might end up having a lot of incremental commits.
+To avoid that we can instead use the <code class="docutils literal notranslate"><span class="pre">--amend</span></code> parameter which tells Git to
+allow you to <strong>update</strong> your previous commit with new changes to include in
+it. If you haven’t shared your work with the world yet you should always
+<strong>amend</strong> your commit until you have shared it.</p>
+<p>Once you start sharing though there are practical situations you need to
+consider when amending which we will discuss in more detail later.</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-text">Demo: git commit –amend</span><a class="headerlink" href="#id12" title="Permalink to this code">¶</a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
+vi README
+
+git status
+git diff
+git add README
+git commit --amend
+
+cat .git/refs/heads/master
+
+git status
+git log
+
+find .git/objects
+git cat-file -t &lt;SHA&gt;
+git cat-file -p &lt;SHA&gt;
+</pre></div>
+</div>
+</div>
+<p>Notice that <code class="docutils literal notranslate"><span class="pre">refs/heads/master</span></code> is yet again updated with a new commit SHA.
+Every time you commit you can expect <code class="docutils literal notranslate"><span class="pre">refs/heads/master</span></code> to move. We will
+talk in more detail about this when we discuss branching.</p>
+</div>
+</div>
+<div class="section" id="demo-working-with-multiple-worktrees">
+<h2>Demo: Working with multiple Worktrees<a class="headerlink" href="#demo-working-with-multiple-worktrees" title="Permalink to this headline">¶</a></h2>
+<p>As mentioned earlier in this chapter, the Git Worktree (Working Directory) is
+where your working files are so that you can work on the files and check them
+into the Git <strong>Local Repository</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is a bit of an advanced topic but it good to know in case you
+need it. This is meant to be a basic introduction to the feature.
+Most folks can effectively use Git without ever requiring this feature.</p>
+</div>
+<p>When you create a Git repo you get one worktree in the Git directory, however
+with the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">worktree</span></code> command it is possible to create additional
+Worktrees. This is useful for those who need to work on multipel things in
+parallel and don’t want to disturb your editor for your existing checked out
+files.</p>
+<p>Maybe you need to work on a quick hotfix that needs to get out ASAP, Worktrees
+are a great way temporarily create a new workspace.</p>
+<div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-text">Demo: git worktree</span><a class="headerlink" href="#id13" title="Permalink to this code">¶</a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git worktree list
+git worktree add ../demo-hotfix
+find .git/worktrees
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-text">find .git/worktrees</span><a class="headerlink" href="#id14" title="Permalink to this code">¶</a></div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>.git/worktrees
+.git/worktrees/demo-hotfix
+.git/worktrees/demo-hotfix/ORIG_HEAD
+.git/worktrees/demo-hotfix/commondir
+<span class="hll">.git/worktrees/demo-hotfix/HEAD
+</span>.git/worktrees/demo-hotfix/logs
+.git/worktrees/demo-hotfix/logs/HEAD
+.git/worktrees/demo-hotfix/index
+<span class="hll">.git/worktrees/demo-hotfix/gitdir
+</span></pre></div>
+</div>
+</div>
+<p>Notice that a new directory is created to hold all the worktrees. Each
+worktree contains metadata about the tree similar to the default Worktree.
+with it’s own separate HEAD and Git Index (Staging Area).</p>
+<p>Next let’s switch to the new Worktree and take a look at what’s there.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ../demo-hotfix
+find .
+cat .git
+</pre></div>
+</div>
+<p>This worktree also has a .git however instead of it being a directory it is
+a file containing a reference to the original Git Directory we looked at
+above. From here we can see that it is sharing information with the original
+repo and no duplication is happening here.</p>
+<p>You can remove the worktree when you are done with
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">worktree</span> <span class="pre">remove</span> <span class="pre">&lt;worktree&gt;</span></code> or just delete the worktree directory with
+your usual commandline commands. Git will automatically clean up the metadata.</p>
+</div>
+<div class="section" id="git-building-blocks-key-takeaways">
+<h2>Git Building Blocks: Key Takeaways<a class="headerlink" href="#git-building-blocks-key-takeaways" title="Permalink to this headline">¶</a></h2>
+<p>In this chapter we learned the fundamental functions of Git. The main
+takeaways you should take from this chapter is try to understand.</p>
+<ul class="simple">
+<li><p>Git Local Repository</p></li>
+<li><p>Git Index (Staging Area)</p></li>
+<li><p>Git Worktree (Workspace)</p></li>
+<li><p>The Git Object Model</p>
+<ul>
+<li><p>Blob object</p></li>
+<li><p>Tree object</p></li>
+<li><p>Commit object</p></li>
+</ul>
+</li>
+</ul>
+<p>We will discuss in more details about these things in later chapters.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="commit-msg.html" class="btn btn-neutral float-right" title="Deeper look into commits" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Git, a follow along guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Thanh Ha
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-46385504-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>

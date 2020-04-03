@@ -1,0 +1,343 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Development lifecycle: Branches and Tags &mdash; Git - a follow along guide  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://www.zxiiro.ca/git-guidedev-lifecycle.html"/>
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Glossary" href="glossary.html" />
+    <link rel="prev" title="Deeper look into commits" href="commit-msg.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Git - a follow along guide
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="building-blocks.html">The building blocks of Git</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="building-blocks.html#overview-of-the-git-directory">Overview of the Git directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building-blocks.html#the-git-object-model">The Git Object Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building-blocks.html#demo-working-with-the-git-directory">Demo: Working with the Git Directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building-blocks.html#demo-working-with-multiple-worktrees">Demo: Working with multiple Worktrees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building-blocks.html#git-building-blocks-key-takeaways">Git Building Blocks: Key Takeaways</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="commit-msg.html">Deeper look into commits</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="commit-msg.html#rules-of-a-great-commit-message">7 rules of a great commit message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-msg.html#commit-message-footer">Commit message footer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-msg.html#signed-off-by">Signed-off-by</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-msg.html#poor-man-s-automated-release-notes">Poor man’s automated release notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-msg.html#troubleshooting-and-debugging">Troubleshooting and debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-msg.html#tools-for-commit-review">Tools for commit review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-msg.html#demo-committing-and-amending">Demo: Committing and amending</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-msg.html#commit-mesages-key-takeaways">Commit Mesages: Key Takeaways</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Development lifecycle: Branches and Tags</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#worktree-management">Worktree management</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Git - a follow along guide</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Development lifecycle: Branches and Tags</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/dev-lifecycle.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="glossary.html" class="btn btn-neutral float-right" title="Glossary" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="commit-msg.html" class="btn btn-neutral float-left" title="Deeper look into commits" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="development-lifecycle-branches-and-tags">
+<h1>Development lifecycle: Branches and Tags<a class="headerlink" href="#development-lifecycle-branches-and-tags" title="Permalink to this headline">¶</a></h1>
+<p>In this section we will discuss commands useful for everyday Git use.</p>
+<p>Topics:</p>
+<ul class="simple">
+<li><p>Viewing commits</p>
+<ul>
+<li><p>git status</p></li>
+<li><p>git log</p></li>
+<li><p>git diff</p></li>
+<li><p>gitk</p></li>
+</ul>
+</li>
+<li><p>Worktree management</p>
+<ul>
+<li><p>.gitignore</p></li>
+<li><p>git clean</p></li>
+</ul>
+</li>
+<li><p>Working with Branches and Tags</p>
+<ul>
+<li><p>git branch</p></li>
+<li><p>git checkout</p></li>
+<li><p>git tag</p></li>
+</ul>
+</li>
+</ul>
+<div class="section" id="worktree-management">
+<h2>Worktree management<a class="headerlink" href="#worktree-management" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="gitignore">
+<h3>.gitignore<a class="headerlink" href="#gitignore" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> file is a special file that can be checked into your Git
+repo to tell the Git client to ignore <strong>tracking</strong> certain files.</p>
+<p>As mentioned in the <a class="reference internal" href="building-blocks.html#local-repository"><span class="std std-ref">Local Repository</span></a> section there is
+also a <code class="docutils literal notranslate"><span class="pre">.git/info/excludes</span></code> file which can also be used to ignore files
+however this file is not shared in Git so any changes here will only affect
+your local work. Typically folks will use <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> as it can be shared
+with the team.</p>
+<p>One point of confusion for many folks with <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> is the idea of
+<strong>tracking</strong> files. This means Git will only ignore the file if it is not yet
+tracked (as in checked into Git). So if you already did <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">file</span></code> to a
+specific file, then that file is already tracked in the Git database so the
+file won’t be ignored.</p>
+<p>Let’s try a few use cases.</p>
+<p><strong>Case 1: Add a .gitignore</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
+<span class="nb">echo</span> <span class="s2">&quot;password.txt&quot;</span> &gt; .gitignore
+
+git status
+<span class="nb">echo</span> <span class="s2">&quot;Password&quot;</span> &gt; password.txt
+
+git status
+git add .gitignore
+
+git status
+git commit
+
+git status
+</pre></div>
+</div>
+<p>Notice that even though we did not commit <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> yet, the fact that
+the file exists is enough for the Git client to read the file and ignore
+any files that match the pattern.</p>
+<p><strong>Case 2: Force tracking on an ignored file</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
+git add -f password.txt
+
+git status
+git commit
+
+git status
+<span class="nb">echo</span> <span class="s2">&quot;Password 2&quot;</span> &gt;&gt; password.txt
+
+git status
+git diff
+</pre></div>
+</div>
+<p>In this case we see that despite the <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> in place we can track a
+file with force. Once tracked however we can see that Git will not ignore
+subsequent ignores.</p>
+</div>
+<div class="section" id="git-clean">
+<h3>git clean<a class="headerlink" href="#git-clean" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clean</span></code> command is useful to quickly manage your local Worktree.
+It provides a quick way to remove temporary files from the repo such as
+leftover build artifacts, temporary test files, or even cleanup tool
+directories.</p>
+<ul class="simple">
+<li><p>git clean</p></li>
+<li><p>git clean -fd</p></li>
+<li><p>git clean -fdx</p></li>
+</ul>
+<p>Manipulating Branches:</p>
+<p>.git/HEAD
+.git/refs/*</p>
+<p>Branches don’t really exist in Git. They are a convenience for humans as a way
+to point to commit objects that would otherwise be impossible for a human to
+track.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="glossary.html" class="btn btn-neutral float-right" title="Glossary" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="commit-msg.html" class="btn btn-neutral float-left" title="Deeper look into commits" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Thanh Ha
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-46385504-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>

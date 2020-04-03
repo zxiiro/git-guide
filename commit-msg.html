@@ -1,0 +1,672 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Deeper look into commits &mdash; Git - a follow along guide  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://www.zxiiro.ca/git-guidecommit-msg.html"/>
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Development lifecycle: Branches and Tags" href="dev-lifecycle.html" />
+    <link rel="prev" title="The building blocks of Git" href="building-blocks.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Git - a follow along guide
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="building-blocks.html">The building blocks of Git</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="building-blocks.html#overview-of-the-git-directory">Overview of the Git directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building-blocks.html#the-git-object-model">The Git Object Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building-blocks.html#demo-working-with-the-git-directory">Demo: Working with the Git Directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building-blocks.html#demo-working-with-multiple-worktrees">Demo: Working with multiple Worktrees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building-blocks.html#git-building-blocks-key-takeaways">Git Building Blocks: Key Takeaways</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Deeper look into commits</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#rules-of-a-great-commit-message">7 rules of a great commit message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#commit-message-footer">Commit message footer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#signed-off-by">Signed-off-by</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#poor-man-s-automated-release-notes">Poor man’s automated release notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting-and-debugging">Troubleshooting and debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tools-for-commit-review">Tools for commit review</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#demo-committing-and-amending">Demo: Committing and amending</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#commit-mesages-key-takeaways">Commit Mesages: Key Takeaways</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dev-lifecycle.html">Development lifecycle: Branches and Tags</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dev-lifecycle.html#worktree-management">Worktree management</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Git - a follow along guide</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Deeper look into commits</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/commit-msg.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="dev-lifecycle.html" class="btn btn-neutral float-right" title="Development lifecycle: Branches and Tags" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="building-blocks.html" class="btn btn-neutral float-left" title="The building blocks of Git" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="deeper-look-into-commits">
+<h1>Deeper look into commits<a class="headerlink" href="#deeper-look-into-commits" title="Permalink to this headline">¶</a></h1>
+<p>Despite being the core function of Git, folks new to Git often ignore the
+importance of understanding
+<a class="reference internal" href="building-blocks.html#commit-object"><span class="std std-ref">Commit Objects</span></a> and how they interact
+with the entire Git system.</p>
+<p>One important overlooked feature of it is the Commit Message, often times
+commits with poorly defined messages are created and submitted to Git repos
+that make it difficult to later troubleshoot or sometimes automate tasks with
+Git.</p>
+<p>In this section we will take a deeper dive into Git Objects themselves as well
+as explore what makes a great <strong>Commit Message</strong> when preparing a commit for
+public review.</p>
+<p>Topics:</p>
+<ul class="simple">
+<li><p>7 rules of a great commit message</p></li>
+<li><p>Poor man’s automated release notes</p></li>
+<li><p>Troubleshooting and debugging</p></li>
+<li><p>Tools for commit review</p></li>
+<li><p>Commit Messages: Key Takeaways</p></li>
+</ul>
+<div class="section" id="rules-of-a-great-commit-message">
+<h2>7 rules of a great commit message<a class="headerlink" href="#rules-of-a-great-commit-message" title="Permalink to this headline">¶</a></h2>
+<p>The below discussion references
+<a class="reference external" href="https://chris.beams.io/posts/git-commit/#seven-rules">https://chris.beams.io/posts/git-commit/#seven-rules</a></p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#separate-subject-from-body-with-a-blank-line"><span class="std std-ref">Separate subject from body with a blank line</span></a></p></li>
+<li><p><a class="reference internal" href="#limit-the-subject-line-to-50-characters"><span class="std std-ref">Limit the subject line to 50 characters</span></a></p></li>
+<li><p><a class="reference internal" href="#capitalize-the-subject-line"><span class="std std-ref">Capitalize the subject line</span></a></p></li>
+<li><p><a class="reference internal" href="#do-not-end-the-subject-line-with-a-period"><span class="std std-ref">Do not end the subject line with a period</span></a></p></li>
+<li><p><a class="reference internal" href="#use-the-imperative-mood-in-the-subject-line"><span class="std std-ref">Use the imperative mood in the subject line</span></a></p></li>
+<li><p><a class="reference internal" href="#wrap-the-body-at-72-characters"><span class="std std-ref">Wrap the body at 72 characters</span></a></p></li>
+<li><p><a class="reference internal" href="#use-the-body-to-explain-what-and-why-vs-how"><span class="std std-ref">Use the body to explain what and why vs. how</span></a></p></li>
+</ol>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Summarize changes in around 50 characters or less
+
+More detailed explanatory text, if necessary. Wrap it to about 72
+characters or so. In some contexts, the first line is treated as the
+subject of the commit and the rest of the text as the body. The
+blank line separating the summary from the body is critical (unless
+you omit the body entirely); various tools like `log`, `shortlog`
+and `rebase` can get confused if you run the two together.
+
+Explain the problem that this commit is solving. Focus on why you
+are making this change as opposed to how (the code explains that).
+Are there side effects or other unintuitive consequences of this
+change? Here&#39;s the place to explain them.
+
+Further paragraphs come after blank lines.
+
+ - Bullet points are okay, too
+
+ - Typically a hyphen or asterisk is used for the bullet, preceded
+   by a single space, with blank lines in between, but conventions
+   vary here
+
+If you use an issue tracker, put references to them at the bottom,
+like this:
+
+Resolves: #123
+See also: #456, #789
+Signed-off-by: First Last &lt;email&gt;
+</pre></div>
+</div>
+<div class="section" id="separate-subject-from-body-with-a-blank-line">
+<h3>Separate subject from body with a blank line<a class="headerlink" href="#separate-subject-from-body-with-a-blank-line" title="Permalink to this headline">¶</a></h3>
+<p>From the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> manpage:</p>
+<blockquote>
+<div><p>Though not required, it’s a good idea to begin the commit message with a
+single short (less than 50 character) line summarizing the change,
+followed by a blank line and then a more thorough description. The text up
+to the first blank line in a commit message is treated as the commit
+title, and that title is used throughout Git. For example,
+Git-format-patch(1) turns a commit into email, and it uses the title on
+the Subject line and the rest of the commit in the body.</p>
+</div></blockquote>
+<p>Similar to email, a commit message has a subject line and a body which
+is separated by a blank line. Do not write your entire commit message in the
+subject line.</p>
+</div>
+<div class="section" id="limit-the-subject-line-to-50-characters">
+<h3>Limit the subject line to 50 characters<a class="headerlink" href="#limit-the-subject-line-to-50-characters" title="Permalink to this headline">¶</a></h3>
+<p>50 characters is a general rule of thumb. Think of emails, do not write
+your entire commit message in just the subject line.</p>
+</div>
+<div class="section" id="capitalize-the-subject-line">
+<h3>Capitalize the subject line<a class="headerlink" href="#capitalize-the-subject-line" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Update</span> <span class="pre">lint</span> <span class="pre">configuration</span> <span class="pre">for</span> <span class="pre">Molecule</span> <span class="pre">v3</span></code> is better than
+<code class="docutils literal notranslate"><span class="pre">update</span> <span class="pre">lint</span> <span class="pre">section</span> <span class="pre">for</span> <span class="pre">Molecule</span> <span class="pre">v3</span></code>.</p>
+</div>
+<div class="section" id="do-not-end-the-subject-line-with-a-period">
+<h3>Do not end the subject line with a period<a class="headerlink" href="#do-not-end-the-subject-line-with-a-period" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Update</span> <span class="pre">lint</span> <span class="pre">configuration</span> <span class="pre">for</span> <span class="pre">Molecule</span> <span class="pre">v3</span></code> is better than
+<code class="docutils literal notranslate"><span class="pre">Update</span> <span class="pre">lint</span> <span class="pre">configuration</span> <span class="pre">for</span> <span class="pre">Molecule</span> <span class="pre">v3.</span></code></p>
+</div>
+<div class="section" id="use-the-imperative-mood-in-the-subject-line">
+<h3>Use the imperative mood in the subject line<a class="headerlink" href="#use-the-imperative-mood-in-the-subject-line" title="Permalink to this headline">¶</a></h3>
+<p>In support of the rule to
+<a class="reference internal" href="#limit-the-subject-line-to-50-characters"><span class="std std-ref">Limit the subject line to 50 characters</span></a> since we don’t have
+a lot of character space using imperative mood saves us some precious
+character space.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Update</span> <span class="pre">lint</span> <span class="pre">configuration</span> <span class="pre">for</span> <span class="pre">Molecule</span> <span class="pre">v3</span></code> is better than
+<code class="docutils literal notranslate"><span class="pre">Updated</span> <span class="pre">lint</span> <span class="pre">configuration</span> <span class="pre">for</span> <span class="pre">Molecule</span> <span class="pre">v3</span></code>.</p>
+</div>
+<div class="section" id="wrap-the-body-at-72-characters">
+<h3>Wrap the body at 72 characters<a class="headerlink" href="#wrap-the-body-at-72-characters" title="Permalink to this headline">¶</a></h3>
+<p>Git does not automatically wrap text so you must manually do this. Keeping
+the limit to 72 characters is good practice to allow for Git to do indentation
+and still be under 80 characters total.</p>
+</div>
+<div class="section" id="use-the-body-to-explain-what-and-why-vs-how">
+<h3>Use the body to explain what and why vs. how<a class="headerlink" href="#use-the-body-to-explain-what-and-why-vs-how" title="Permalink to this headline">¶</a></h3>
+<p>Think of yourself as the reviewer of the change. If someone proposed the
+change to you, what information would you like to know about it for you to
+approve the review.</p>
+<p>Reviewers can look at the diff to see what exactly was changed so focus on
+telling the reviewer why they should accept your change. You are essentially
+writing a proposal here.</p>
+<p>Bad example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Updated README
+</pre></div>
+</div>
+<p>Good example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Add section on how to contribute to the project
+
+Improved the README to add details on how to create a developer account
+and contribution guidelines to help new developers more easily engage
+with the project.
+</pre></div>
+</div>
+<p>If you are fixing code or a test, include details on how to reproduce the
+problem so that the reviewer doesn’t have to reach out to you for further
+details on how to retest.</p>
+</div>
+</div>
+<div class="section" id="commit-message-footer">
+<h2>Commit message footer<a class="headerlink" href="#commit-message-footer" title="Permalink to this headline">¶</a></h2>
+<p>The final block of a commit message is a commit message footer. Similar to
+email it’s where you sign off on your message as well as include other useful
+metadata. Typically for references to issues or links to pages for additional
+information.</p>
+<p>Example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Issue: ABC-123
+Change-Id: Iaa40ef0377409e08e6efd41aa967249f9d3c4xyz
+Co-authored-by: Bob &lt;bob@example.com&gt;
+Signed-off-by: Tim &lt;tim@example.com&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="signed-off-by">
+<h2>Signed-off-by<a class="headerlink" href="#signed-off-by" title="Permalink to this headline">¶</a></h2>
+<p>You may have noticed in many open source projects folks leave a
+<code class="docutils literal notranslate"><span class="pre">Signed-off-by:</span> <span class="pre">Firstname</span> <span class="pre">Lastname</span> <span class="pre">&lt;someone&#64;example.com&gt;</span></code>.</p>
+<p>This can be added via the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-s</span></code> command is a convenience parameter
+to automatically type it in for you but you can also type it in by hand when
+writing your commit message.</p>
+<p>Signed-off-by doesn’t really mean much in most projects but some open source
+projects use it as a way of indicating that you have signed off on an
+official document such as a <strong>Contributor License Agreement (CLA)</strong> or a
+<strong>Developer Certificate of Origin</strong>.</p>
+<p>Reference: <a class="reference external" href="https://developercertificate.org/">https://developercertificate.org/</a></p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">Developer Certificate of Origin</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Developer Certificate of Origin
+Version 1.1
+
+Copyright (C) 2004, 2006 The Linux Foundation and its contributors.
+1 Letterman Drive
+Suite D4700
+San Francisco, CA, 94129
+
+Everyone is permitted to copy and distribute verbatim copies of this
+license document, but changing it is not allowed.
+
+
+Developer&#39;s Certificate of Origin 1.1
+
+By making a contribution to this project, I certify that:
+
+(a) The contribution was created in whole or in part by me and I
+    have the right to submit it under the open source license
+    indicated in the file; or
+
+(b) The contribution is based upon previous work that, to the best
+    of my knowledge, is covered under an appropriate open source
+    license and I have the right under that license to submit that
+    work with modifications, whether created in whole or in part
+    by me, under the same open source license (unless I am
+    permitted to submit under a different license), as indicated
+    in the file; or
+
+(c) The contribution was provided directly to me by some other
+    person who certified (a), (b) or (c) and I have not modified
+    it.
+
+(d) I understand and agree that this project and the contribution
+    are public and that a record of the contribution (including all
+    personal information I submit with it, including my sign-off) is
+    maintained indefinitely and may be redistributed consistent with
+    this project or the open source license(s) involved.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="poor-man-s-automated-release-notes">
+<h2>Poor man’s automated release notes<a class="headerlink" href="#poor-man-s-automated-release-notes" title="Permalink to this headline">¶</a></h2>
+<p>To prove a point that well defined commit messages can be useful. One way to
+take advantage of a repo that follows the practice is to automate generation
+of release notes with commit messages.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git log --no-merges --pretty<span class="o">=</span>format:<span class="s2">&quot;%h %&lt;(20) %an %s&quot;</span> <span class="m">1</span>.0.0..2.0.0
+</pre></div>
+</div>
+<p>For example the Jenkins Job Builder (JJB) project generates release notes this
+way. You can reproduce one by following these steps:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://review.opendev.org/jjb/jenkins-job-builder
+git log --no-merges --pretty<span class="o">=</span>format:<span class="s2">&quot;%h %&lt;(20) %an %s&quot;</span> <span class="m">2</span>.9.0..3.0.0
+</pre></div>
+</div>
+<p>You should get something similar to this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1d48093f  Jelle van der Waa    Fix typo in bitbucket_scm discover-branch parameter
+c907f770  Aviel Yosef          Adding support for the cachet gating plugin
+77549954  Sorin Sbarnea        Correct dependencies on tox linters
+a9e12ed4  Philip Roche         Add support for rendering jinja template as yaml
+073e7bb5  Ivan Fernandez Calvo Add support for GH Custom Notification Context
+dfbcbb25  Johann David         Add support for &#39;Micro Focus Application Automation Tools&#39;
+ddc5ee77  Patrick Paul         Include support for jacoco source inclusion pattern
+a90f084f  Chris Koehnke        Add &#39;skip-initial-build&#39; to project multibranch
+9b0fd46e  OpenDev Sysadmins    OpenDev Migration Patch
+a4e5be1e  Evgeni Golov         fix job-template call in include-raw-escaped fixtures
+71f1c89b  Sorin Sbarnea        remove support of old plugin config format
+<span class="hll">2bff652b  Andrey Kostrov       Add `Specs support` for `artifactory_generic` Add support of Artifactory Specs https://www.jfrog.com/confluence/display/RTF/Using+File+Specs
+</span>c5013b61  Thanh Ha             Ignore view update if not specified
+c3539a31  Thanh Ha             Refactor jobfilters to separate file
+e6398cf3  Vishal Bhoj          Set reference repo under clone options
+fc7864ab  Gleb Samsonov        adding variable bindings option to extended parameters
+062b759e  Norbert Grünwald     Add &#39;publishers-from&#39; to the publishers module
+55de2146  Areum Cho            Add support for Packer plugin
+23079af7  Thomas Bechtold      Allow pyyaml &gt;= 5
+43f002c6  Alexander Evseev     Property to disable job resume on Jenkins restart
+ced1495a  Ian Wienand          Replace openstack.org git:// URLs with https://
+87af31a3  Ivan Remizov         Fix loader overwriting
+b67c0bc7  Kyr Shatskyy         Add support for &#39;RocketChat Notifier Plugin&#39;
+<span class="hll">0f2c43fc  Thiago Miotto        Adds match-script and groovy-sandbox to Lockable Resources Plugin properties
+</span><span class="hll">8cb88e03  Brian Kruger         [jenkins-job-builder] - Add support for Generic Webhook Trigger
+</span>a2ad875f  Ladislav Thon        add the &quot;honorRefspec&quot; option to the Git SCM
+c59b5a52  Daniel Watkins       Fix new flake8 failures
+ff338dc9  amit lin             Adds github scm multibranch regex branch filter
+bc55a673  Mykola Nikishov      Do not ignore global-settings-type in Maven module
+32802fdd  qingszhao            Update mailinglist address
+78e4f00c  Li-Wen Hsu           Add retry support to plugins depend on Publish Over X
+774dd59f  Dane Foster          adds vault unlocking parameter to ansible builder
+cf152d67  sbussetti            Adds named branches to property strategy support
+2914c7a7  tanhengyeow          cucumber-reports: Add support for new options
+02e85408  Thanh Ha             Fix default &#39;0&#39; being ignored
+039c860d  tanhengyeow          Add support for &quot;Build / Publish Docker Image&quot;
+</pre></div>
+</div>
+<p>This has a many of the key points we are interested in a simple release notes
+package.</p>
+<ol class="arabic simple">
+<li><p>Details on what changed since last release</p></li>
+<li><p>Credit to the author of the change</p></li>
+<li><p>A reference that can be used to get more details if necessary</p></li>
+</ol>
+</div>
+<div class="section" id="troubleshooting-and-debugging">
+<h2>Troubleshooting and debugging<a class="headerlink" href="#troubleshooting-and-debugging" title="Permalink to this headline">¶</a></h2>
+<p>Commit messages are also great for quickly troubleshooting an issue if some
+change broke our project in an unexpected way. If commit messages are well
+formed, developers can review the git log to quickly identify which changes
+may be related to the unexpected issue and narrow down the problem much more
+quickly.</p>
+<p>Referring back to the JJB project again, there was a case where a hotfix
+release had to be pushed out shortly after a major release. If we take a look
+at the difference between versions 2.2.0 to 2.2.1 we can see that the hotfix
+release reverted a particular commit:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git log --no-merges --pretty<span class="o">=</span>format:<span class="s2">&quot;%h %&lt;(20) %an %s&quot;</span> <span class="m">2</span>.2.0..2.2.1
+
+c33dbaaa  Thanh Ha             Revert <span class="s2">&quot;Allow dashes in variable key names&quot;</span>
+</pre></div>
+</div>
+<p>After some users started deploying version 2.2.0 we quickly discovered that
+folks using certain characters in their variable names. The original commit
+<code class="docutils literal notranslate"><span class="pre">b92336aa</span>&#160; <span class="pre">Darragh</span> <span class="pre">Bailey</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">Allow</span> <span class="pre">dashes</span> <span class="pre">in</span> <span class="pre">variable</span> <span class="pre">key</span> <span class="pre">names</span></code> was
+descriptive enough that allowed us to narrow down to this commit to identify
+the issue and revert and release a hotfix.</p>
+</div>
+<div class="section" id="tools-for-commit-review">
+<h2>Tools for commit review<a class="headerlink" href="#tools-for-commit-review" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="git-status">
+<h3>git status<a class="headerlink" href="#git-status" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> command is a useful command for showing the current state
+of your Git directory. Showing the relation between your <a class="reference internal" href="glossary.html#term-worktree"><span class="xref std std-term">Worktree</span></a>.</p>
+<p><strong>git status: brand new repo</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>On branch master
+
+No commits yet
+
+nothing to commit (create/copy files and use &quot;git add&quot; to track)
+</pre></div>
+</div>
+<p><strong>git status: clean worktree</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>On branch master
+nothing to commit, working tree clean
+</pre></div>
+</div>
+<p><strong>git status: untracked file</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>On branch master
+Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+
+    abc
+
+nothing added to commit but untracked files present (use &quot;git add&quot; to track)
+</pre></div>
+</div>
+<p><strong>git status: modified file</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>On branch master
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+
+    modified:   test
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</pre></div>
+</div>
+<p><strong>git status: staged file</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>On branch master
+Changes to be committed:
+  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)
+
+    new file:   abc
+</pre></div>
+</div>
+</div>
+<div class="section" id="git-log">
+<h3>git log<a class="headerlink" href="#git-log" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> command is useful for inspecting the branch history.
+This command unfortunately is only as useful as participants on the project
+make it. See <strong>The importance of a Commit Message</strong> for best
+practices on managing your commit message.</p>
+<p>Check the log of the projects you work on often and try to see if you can
+understand the progress of the project from the log. Use the following log
+commands and explore the differences:</p>
+<ul class="simple">
+<li><p>git log</p></li>
+<li><p>git shortlog</p></li>
+<li><p>git log 1.0.0..2.0.0</p></li>
+</ul>
+<p>Many Git commands support passing a commit range to tell Git to show you what
+changes are in the 2nd reference point that’s not in the 1st reference point.
+What Git is doing in this case is taking the 2 commits as a starting point,
+then walk through the commit history looking for a common ancestor or parent
+commit. Then it uses the commit parent as the starting point of history and
+returning the results from the parent commit until the 2nd reference point.</p>
+<p>Try reversing the 2 reference points and see how the log changes.</p>
+</div>
+<div class="section" id="git-diff">
+<h3>git diff<a class="headerlink" href="#git-diff" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> command is useful for checking out what changed between 2
+commit points. Try the following:</p>
+<ul class="simple">
+<li><p>git diff</p></li>
+<li><p>git diff HEAD~1</p></li>
+<li><p>git diff origin/master</p></li>
+<li><p>git diff BranchA BranchB</p></li>
+</ul>
+</div>
+<div class="section" id="gitk">
+<h3>gitk<a class="headerlink" href="#gitk" title="Permalink to this headline">¶</a></h3>
+<p>This is the default Git GUI that comes with standard Git. It’s a powerful
+GUI based viewer to allow you to see the state of the local Git repo. It’s
+a combination of <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> put together into a single
+easy to navigate viewer.</p>
+<div class="figure align-default" id="id2">
+<img alt="gitk" src="_images/gitk.png" />
+<p class="caption"><span class="caption-text">gitk - Graphical history viewer</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="demo-committing-and-amending">
+<h2>Demo: Committing and amending<a class="headerlink" href="#demo-committing-and-amending" title="Permalink to this headline">¶</a></h2>
+<p>First let’s create a file that we can use to commit and amend.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
+
+<span class="nb">echo</span> <span class="s2">&quot;To contribute to this project simply open a PR.&quot;</span> &gt; CONTRIBUTING
+git status
+
+git add CONTRIBUTING
+git status
+
+git commit
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Avoid using <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">'Message'</span></code>. While it may seem handy it should
+be considered a bad habit as it promotes giving little thought to the
+message. You should always edit your commit message with a proper editor.
+This gives you the time to think about your message as well as gives you
+time to enter relevant footer information to create a more complete
+message.</p>
+</div>
+<p><strong>Amending the commit</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
+
+<span class="nb">echo</span> <span class="s2">&quot;If you need help, reach out to the #help channel.&quot;</span> &gt;&gt; CONTRIBUTING
+git status
+
+git add CONTRIBUTING
+git status
+
+git commit --amend
+</pre></div>
+</div>
+<p><strong>Signing off on your commit</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git commit --amend -s
+</pre></div>
+</div>
+<p>Alternatively you can manually enter the Sign-off-by line with your editor.</p>
+</div>
+<div class="section" id="commit-mesages-key-takeaways">
+<h2>Commit Mesages: Key Takeaways<a class="headerlink" href="#commit-mesages-key-takeaways" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Make your commit messages meaningful</p></li>
+<li><p>Commit messages can be used to quickly diagnose issues or even automation</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="dev-lifecycle.html" class="btn btn-neutral float-right" title="Development lifecycle: Branches and Tags" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="building-blocks.html" class="btn btn-neutral float-left" title="The building blocks of Git" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Thanh Ha
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-46385504-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>
