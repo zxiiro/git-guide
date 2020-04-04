@@ -23,4 +23,5 @@ newbies as well as veterans of Git.
     building-blocks
     commit-objects
     dev-lifecycle
+    remotes
     glossary
