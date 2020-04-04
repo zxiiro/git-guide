@@ -23,6 +23,11 @@ Topics:
   * git checkout
   * git tag
 
+* Merging code
+
+  * git merge
+  * git rebase
+
 
 Worktree management
 -------------------
@@ -116,7 +121,15 @@ track.
 Working with Branches and Tags
 ------------------------------
 
-.. figure:: img/git-object-commit.png
-   :alt: Commit object
+.. figure:: img/git-directory-branches.png
+   :alt: Workspace: Branches and Tags
 
-   Commit object
+   Workspace: Branches and Tags
+
+Merging code
+------------
+
+.. figure:: img/git-directory-merges.png
+   :alt: Workspace: Merge & Rebase
+
+   Workspace: Merge & Rebase
