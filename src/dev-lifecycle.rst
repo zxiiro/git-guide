@@ -111,3 +111,12 @@ Manipulating Branches:
 Branches don't really exist in Git. They are a convenience for humans as a way
 to point to commit objects that would otherwise be impossible for a human to
 track.
+
+
+Working with Branches and Tags
+------------------------------
+
+.. figure:: img/git-object-commit.png
+   :alt: Commit object
+
+   Commit object

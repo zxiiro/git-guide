@@ -21,7 +21,6 @@ Topics:
   * git init
   * git add
   * git commit
-  * git checkout
 
 * Demo: Working with multiple Worktrees
 * Git Fundamentals: Key Takeaways
@@ -30,7 +29,7 @@ Topics:
 Overview of the Git directory
 -----------------------------
 
-.. figure:: img/git-directory-1.png
+.. figure:: img/git-directory-repo.png
    :alt: Worktree | Staging Area | Local Repository
 
    Worktree | Staging Area | Local Repository
