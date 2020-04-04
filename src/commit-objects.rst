@@ -250,11 +250,19 @@ are contributing to has a document similar to this.
 Final tips on commit messages
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you are actively participating in a project, spend some time reviewing
-code on that project even if you are not a maintainer or committer on the
-project. This is the best way for you to quickly learn the best practices
-of not only the project but also what we discussed here as it is easier to
-understand the hardships of a code reviewer if you are one yourself.
+* **Resist the urge to use** ``git commit -m``
+
+  While it may seem handy at first, it promotes a habit of writing
+  unthoughtful commit messages. By editing your commit message in a full
+  editor you will spend more time thinking about your commit message.
+
+* **Spend time reviewing code yourself**
+
+  If you are actively participating in a project, spend some time reviewing
+  code on that project even if you are not a maintainer or committer on the
+  project. This is the best way for you to quickly learn the best practices of
+  not only the project but also what we discussed here as it is easier to
+  understand the hardships of a code reviewer if you are one yourself.
 
 
 Poor man's automated release notes
