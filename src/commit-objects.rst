@@ -360,12 +360,17 @@ the issue and revert and release a hotfix.
 Tools for commit review
 -----------------------
 
+.. contents::
+    :local:
+    :depth: 1
+
 
 git status
 ^^^^^^^^^^
 
 The ``git status`` command is a useful command for showing the current state
-of your Git directory. Showing the relation between your :term:`Worktree`.
+of your Git directory. Showing the relation between your :term:`Worktree` and
+the Local Repository.
 
 
 **git status: brand new repo**
