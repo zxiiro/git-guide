@@ -38,7 +38,7 @@ Second iteration of revision control
 
 In this iternation, I started zipping my source code every single day with a
 YYYY-MM-DD in the zip filename to track my daily progress of code changes.
-If I had interested parallel ideas I wanted to try out, I would copy the code
+If I had interesting parallel ideas I wanted to try out, I would copy the code
 directory into another folder and work on the idea separately from the main
 code directory. This gave me a very rudimentary code branch that I could copy
 back to my main code base if the idea worked out.
