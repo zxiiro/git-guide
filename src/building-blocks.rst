@@ -3,27 +3,9 @@ The building blocks of Git
 
 Topics:
 
-* The Git directory
-
-  * Local Repository
-  * Worktree (Working Directory)
-  * Staging Area (Index)
-
-* The Git Object Model
-
-  * Commit
-  * Trees
-  * Blobs
-  * Tags
-
-* Demo: Working with the Git directory
-
-  * git init
-  * git add
-  * git commit
-
-* Demo: Working with multiple Worktrees
-* Git Fundamentals: Key Takeaways
+.. contents::
+    :local:
+    :depth: 2
 
 
 Overview of the Git directory
@@ -234,6 +216,12 @@ From here we can see how all the 4 Git Object types interact with each other:
 * A Commit references both a parent commit and a Tree
 * A Tree can reference another Tree as well as a Blob
 * 2 files can also reference the same Blob
+
+
+Refspecs
+--------
+
+.. todo:: Write this section.
 
 
 Demo: Working with the Git Directory
