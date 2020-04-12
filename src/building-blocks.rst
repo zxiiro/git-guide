@@ -218,12 +218,6 @@ From here we can see how all the 4 Git Object types interact with each other:
 * 2 files can also reference the same Blob
 
 
-Refspecs
---------
-
-.. todo:: Write this section.
-
-
 Demo: Working with the Git Directory
 ------------------------------------
 
@@ -476,6 +470,10 @@ consider when amending which we will discuss in more detail later.
 Notice that ``refs/heads/master`` is yet again updated with a new commit SHA.
 Every time you commit you can expect ``refs/heads/master`` to move. We will
 talk in more detail about this when we discuss branching.
+
+
+git checkout
+^^^^^^^^^^^^
 
 
 Demo: Working with multiple Worktrees

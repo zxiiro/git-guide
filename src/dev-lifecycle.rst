@@ -89,6 +89,117 @@ directories.
 * git clean -fdx
 
 
+Git References
+--------------
+
+As mentioned earlier, Git References are stored in the ``.git/refs/*``
+directory. References offer a human readable way to reference specific
+commits, think of them as bookmarks.
+
+There are 4 useful reference points one should know to effectively use Git:
+
+.. contents::
+    :local:
+    :depth: 1
+
+At a rudimentary level you can create new references by simply creating files
+in these directories, however Git offers commands to handle this automatically
+for you.
+
+
+HEAD
+^^^^
+
+Stored in ``.git/HEAD``, HEAD is a special reference point that always points
+to your current location in Git. Typically this is a symbolic reference to the
+*branch* or *tag* you have checked out but it can also point to a specific
+commit hash. In which case you'll be in Detached HEAD mode.
+
+**HEAD** will move to a new commit every time ``git commit`` or
+``git checkout`` is issued.
+
+
+Branches
+^^^^^^^^
+
+Stored in ``.git/refs/heads/*``, **branches** are a human readable reference
+to a specific commit that moves along as you commit new code to the project.
+Often we work on branches in a development workflow to indicate the code path
+we are working on such as active development or to maintain supported releases.
+
+The **branch** reference point will move every time ``git commit`` is issued.
+
+
+Tags
+^^^^
+
+Stored in ``.git/refs/tags/*``, **tags** are human readable reference points
+to a specific Git Object. Tags are immutable meaning once a tag is created it
+should never be changed once it is shared.
+
+For this reason the most common use case for tags is to reference a release so
+that folks can refer back to the exact source code that built a particular
+release for historical reasons. Another less common use case though for tags
+is to reference specific interesting points in time. Maybe there's an
+interesting lessons learned that you want to refer others to, or interesting
+commit that might be interesting to reference back to for historical reasons,
+we can use a tag to bookmark those commits.
+
+The **tag** reference point is not expected to ever move.
+
+
+Remotes
+^^^^^^^
+
+Stored in ``.git/refs/remotes/*``, **remotes** are read-only copies of
+branches from another Git repository. They are read-only to you so you cannot
+update these references but they get updated when you sync via ``git fetch``
+if the remote repository has moved since you lasted fetched.
+
+The **remote** reference points will move every time ``git fetch`` is issued.
+
+.. note::
+
+    You may notice that there are no such thing as remote tags, mainly because
+    as mentioned earlier tags never move so tags should always be the same in
+    every Git repo. When ``git fetch --tags`` is called if there are tags you
+    are missing they will be created in the usual ``.git/refs/tags/*``
+    directory.
+
+
+Accessing references
+^^^^^^^^^^^^^^^^^^^^
+
+You can access references using the full reference path or by their short
+references.
+
+* ``git checkout master``
+* ``git checkout heads/master``
+* ``git checkout refs/heads/master``
+
+All 3 commands checkout the same commit but the last 2 will put you in
+``detached HEAD`` mode but it's good to understand that Git is making an
+assumption on your behalf when you do not reference the full path.
+
+If you have a branch and a tag with the same name for example:
+
+* ``.git/refs/heads/1.0``
+* ``.git/refs/tags/1.0``
+
+Git will prefer the *branch* over the *tag*. If you want the tag you will have
+to be more explicit.
+
+.. code-block:: none
+
+    $ git checkout 1.0
+    warning: refname '1.0' is ambiguous.
+    Switched to branch '1.0'
+
+Apart from branches, all other checkouts will result in ``detached HEAD`` mode.
+It is recommended if you are planning to do any development make sure you
+turn it into a branch so that you can get proper tracking.
+
+
 Working with Branches and Tags
 ------------------------------
 
@@ -96,54 +207,6 @@ Working with Branches and Tags
    :alt: Workspace: Branches and Tags
 
    Workspace: Branches and Tags
-
-Branches and Tags in Git are essentially bookmarks. It's an easy to remember
-reference to a commit. The commit itself has a Commit SHA as mentioned earlier
-which is the real address of the commit. Without Branches and Tags we would
-have to memorize all these SHAs to find commits we are looking for.
-
-When working with Branches and Tags there are 3 important Git Local Repository
-locations to understand.
-
-1. ``.git/HEAD`` or **HEAD** is the reference point to the current commit
-   reference point in the worktree. Often this just points to a branch or tag
-   but if you checked out a specific Commit SHA it will point to the SHA in
-   what's called a **detached HEAD** mode.
-
-   **HEAD** will move to a new commit every time ``git commit`` or
-   ``git checkout`` is issued.
-
-2. ``.git/refs/heads/*`` or **branches** is where all the branches are stored.
-   Every file here is a branch, and the contents of the file just points to
-   the Commit SHA of the commit the branch is currently at.
-
-   The **branch** reference point will move every time ``git commit`` is
-   issued.
-
-3. ``.git/refs/tags/*`` or **tags** is where all the tags are stored and same
-   as branches the contents point to a specific Commit SHA of the tagged
-   reference point. The difference however is that tags are immutable and do
-   not move. They will always point to the same commit every time.
-
-   The **tag** reference point is not expected to ever move.
-
-Branches and Tags from this perspective are essentially the same thing. The
-are bookmarks pointing to specific Commit SHAs for easy look up. The
-difference however is tags are immutable meaning they do not ever change so
-you can have a guarentee that they will always point to the same commit
-object.
-
-For this reason the most common use case for tags is to reference a release so
-that folks can refer back to the exact source code that built a particular
-release for historical reasons. Another less common use case though for tags
-is to reference specific interesting points in time. Maybe there's an
-interesting lessons learned or interesting commit that might be interesting
-to reference back to for historical reasons, we can use a tag to bookmark
-those commits.
-
-Branches on the otherhand are constantly in flow. Every time you do a
-``git commit`` while on a specific branch Git will automatically update
-the branch reference point to the new commit you just made.
 
 
 git-checkout
@@ -198,6 +261,7 @@ git-branch
 
 .. code-block:: bash
 
+    echo 'a1b2c3' > .git/refs/heads/new-branch
     git branch new-branch master
     cat .git/HEAD
     cat .git/refs/heads/new-branch
@@ -270,17 +334,67 @@ information you wish to add to the tag such as upgrade procedures or release
 notes which you might want to archive in a git tag.
 
 
-Merging code
-------------
+Code Merges: 3 types of merges
+------------------------------
 
 .. figure:: img/git-directory-merges.png
    :alt: Workspace: Merge & Rebase
 
    Workspace: Merge & Rebase
 
+When working with Git there comes the eventual point in time where we need to
+copy code from one branch to another. This is referred to as merging code
+in Git.
 
-git-merge
-^^^^^^^^^
+In Git there are 3 distinctive ways to merge code which we will discuss:
 
-git-rebase
-^^^^^^^^^^
+* Fast Forward Merges
+* Merge Commit
+* Rebase
+
+Contents:
+
+.. contents::
+    :local:
+    :depth: 1
+
+
+Cherry Pick: git cherry-pick
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Technically not a merge type but is a basic building block to copying code
+from one branch to another which is effectively what merging code is doing
+in Git.
+
+.. code-block::
+
+    git status
+    git checkout -b add-new-file master
+
+    echo "Yo" > newfile.txt
+    git add newfile.txt
+    git commit -s
+    git status
+
+    git checkout master
+    git status
+
+    git cherry-pick add-new-file
+    git status
+
+    git log
+    git diff HEAD~1
+    gitk
+
+
+Fast Forward Merge: git merge --ff-only
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+Merge Commit: git merge --no-ff
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+Rebasing: git rebase
+^^^^^^^^^^^^^^^^^^^^
+
