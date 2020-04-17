@@ -250,11 +250,19 @@ are contributing to has a document similar to this.
 Final tips on commit messages
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you are actively participating in a project, spend some time reviewing
-code on that project even if you are not a maintainer or committer on the
-project. This is the best way for you to quickly learn the best practices
-of not only the project but also what we discussed here as it is easier to
-understand the hardships of a code reviewer if you are one yourself.
+* **Resist the urge to use** ``git commit -m``
+
+  While it may seem handy at first, it promotes a habit of writing
+  unthoughtful commit messages. By editing your commit message in a full
+  editor you will spend more time thinking about your commit message.
+
+* **Spend time reviewing code yourself**
+
+  If you are actively participating in a project, spend some time reviewing
+  code on that project even if you are not a maintainer or committer on the
+  project. This is the best way for you to quickly learn the best practices of
+  not only the project but also what we discussed here as it is easier to
+  understand the hardships of a code reviewer if you are one yourself.
 
 
 Poor man's automated release notes
@@ -352,12 +360,17 @@ the issue and revert and release a hotfix.
 Tools for commit review
 -----------------------
 
+.. contents::
+    :local:
+    :depth: 1
+
 
 git status
 ^^^^^^^^^^
 
 The ``git status`` command is a useful command for showing the current state
-of your Git directory. Showing the relation between your :term:`Worktree`.
+of your Git directory. Showing the relation between your :term:`Worktree` and
+the Local Repository.
 
 
 **git status: brand new repo**
@@ -467,6 +480,45 @@ easy to navigate viewer.
    :alt: gitk
 
    gitk - Graphical history viewer
+
+
+History of specific path
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Many Git commands support the ability to look up the history of specific
+paths. Whether it be a directory or individual files.
+
+* gitk -- README
+* gitk -- src/
+* git diff -- README
+* git log -- src/
+
+The ``--`` is necessary if you are looking for details on a path that was
+removed from current commits.
+
+
+Commit ranges
+^^^^^^^^^^^^^
+
+Many Git commands also support the ability to pass ranges using ``from..to``
+notation. This is useful if you want to know what's different between 2
+branches.
+
+**Double dot notation** The double dot notation tells Git to show you only
+commits that are in the 2nd parameter that is not common to both.
+
+**Triple dot notation** The triple dot notation tells Git to show you commits
+from both parameters that are not common.
+
+.. figure:: img/git-branch-basic.png
+   :alt: Git history with work branch
+
+   Git history with work branch
+
+Examples:
+
+* gitk 1.0..2.0
+* git log --no-merges --pretty=format:"%h %<(20) %an %s" 2.2.0..2.2.1
 
 
 Demo: Committing and amending

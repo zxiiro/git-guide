@@ -3,34 +3,15 @@ The building blocks of Git
 
 Topics:
 
-* The Git directory
-
-  * Local Repository
-  * Worktree (Working Directory)
-  * Staging Area (Index)
-
-* The Git Object Model
-
-  * Commit
-  * Trees
-  * Blobs
-  * Tags
-
-* Demo: Working with the Git directory
-
-  * git init
-  * git add
-  * git commit
-  * git checkout
-
-* Demo: Working with multiple Worktrees
-* Git Fundamentals: Key Takeaways
+.. contents::
+    :local:
+    :depth: 2
 
 
 Overview of the Git directory
 -----------------------------
 
-.. figure:: img/git-directory-1.png
+.. figure:: img/git-directory-repo.png
    :alt: Worktree | Staging Area | Local Repository
 
    Worktree | Staging Area | Local Repository
@@ -489,6 +470,10 @@ consider when amending which we will discuss in more detail later.
 Notice that ``refs/heads/master`` is yet again updated with a new commit SHA.
 Every time you commit you can expect ``refs/heads/master`` to move. We will
 talk in more detail about this when we discuss branching.
+
+
+git checkout
+^^^^^^^^^^^^
 
 
 Demo: Working with multiple Worktrees

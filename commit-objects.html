@@ -80,6 +80,12 @@
             
             
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="basic-revision-control.html">Basic Revision Control</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="basic-revision-control.html#first-iteration-of-revision-control">First iteration of revision control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic-revision-control.html#second-iteration-of-revision-control">Second iteration of revision control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic-revision-control.html#modern-revision-control">Modern Revision control</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="building-blocks.html">The building blocks of Git</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="building-blocks.html#overview-of-the-git-directory">Overview of the Git directory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="building-blocks.html#the-git-object-model">The Git Object Model</a></li>
@@ -99,6 +105,15 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="dev-lifecycle.html">Development lifecycle: Branches and Tags</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="dev-lifecycle.html#worktree-management">Worktree management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev-lifecycle.html#git-references">Git References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev-lifecycle.html#working-with-branches-and-tags">Working with Branches and Tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev-lifecycle.html#code-merges-3-types-of-merges">Code Merges: 3 types of merges</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="remotes.html">Working with remotes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="remotes.html#git-remote-commands">Git Remote Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remotes.html#git-workflows">Git Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remotes.html#resolving-merge-conflicts">Resolving merge conflicts</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
@@ -178,7 +193,7 @@
   <div class="section" id="deeper-look-into-commits">
 <h1>Deeper look into commits<a class="headerlink" href="#deeper-look-into-commits" title="Permalink to this headline">¶</a></h1>
 <p>Despite being the core function of Git, folks new to Git often ignore the
-importance of understanding <a class="reference internal" href="glossary.html#term-commit-object"><span class="xref std std-term">Commit Objects</span></a> and how
+importance of understanding <a class="reference internal" href="glossary.html#term-Commit-object"><span class="xref std std-term">Commit Objects</span></a> and how
 they interact with the entire Git system.</p>
 <p>One important overlooked feature of it is the Commit Message, often times
 commits with poorly defined messages are created and submitted to Git repos
@@ -187,23 +202,23 @@ Git.</p>
 <p>In this section we will take a deeper dive into Git Objects themselves as well
 as explore what makes a great <strong>Commit Message</strong> when preparing a commit for
 public review.</p>
-<div class="figure align-default" id="id1">
+<div class="figure align-default" id="id2">
 <img alt="Commit object" src="_images/git-object-commit.png" />
-<p class="caption"><span class="caption-text">Commit object</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text">Commit object</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 <p>Topics:</p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#writing-a-great-commit-message" id="id4">Writing a great commit message</a></p></li>
-<li><p><a class="reference internal" href="#poor-man-s-automated-release-notes" id="id5">Poor man’s automated release notes</a></p></li>
-<li><p><a class="reference internal" href="#troubleshooting-and-debugging" id="id6">Troubleshooting and debugging</a></p></li>
-<li><p><a class="reference internal" href="#tools-for-commit-review" id="id7">Tools for commit review</a></p></li>
-<li><p><a class="reference internal" href="#demo-committing-and-amending" id="id8">Demo: Committing and amending</a></p></li>
-<li><p><a class="reference internal" href="#commit-mesages-key-takeaways" id="id9">Commit Mesages: Key Takeaways</a></p></li>
+<li><p><a class="reference internal" href="#writing-a-great-commit-message" id="id6">Writing a great commit message</a></p></li>
+<li><p><a class="reference internal" href="#poor-man-s-automated-release-notes" id="id7">Poor man’s automated release notes</a></p></li>
+<li><p><a class="reference internal" href="#troubleshooting-and-debugging" id="id8">Troubleshooting and debugging</a></p></li>
+<li><p><a class="reference internal" href="#tools-for-commit-review" id="id9">Tools for commit review</a></p></li>
+<li><p><a class="reference internal" href="#demo-committing-and-amending" id="id10">Demo: Committing and amending</a></p></li>
+<li><p><a class="reference internal" href="#commit-mesages-key-takeaways" id="id11">Commit Mesages: Key Takeaways</a></p></li>
 </ul>
 </div>
 <div class="section" id="writing-a-great-commit-message">
-<h2><a class="toc-backref" href="#id4">Writing a great commit message</a><a class="headerlink" href="#writing-a-great-commit-message" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id6">Writing a great commit message</a><a class="headerlink" href="#writing-a-great-commit-message" title="Permalink to this headline">¶</a></h2>
 <p>Similar to email, a commit message has a subject line and a body which
 is separated by a blank line. Do not write your entire commit message in the
 subject line.</p>
@@ -352,8 +367,8 @@ projects use it as a way of indicating that you have signed off on an
 official document such as a <strong>Contributor License Agreement (CLA)</strong> or a
 <strong>Developer Certificate of Origin</strong>.</p>
 <p>Reference: <a class="reference external" href="https://developercertificate.org/">https://developercertificate.org/</a></p>
-<div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text">Developer Certificate of Origin</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">Developer Certificate of Origin</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Developer Certificate of Origin
 Version 1.1
 
@@ -400,15 +415,24 @@ are contributing to has a document similar to this.</p>
 </div>
 <div class="section" id="final-tips-on-commit-messages">
 <h3>Final tips on commit messages<a class="headerlink" href="#final-tips-on-commit-messages" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p><strong>Resist the urge to use</strong> <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span></code></p>
+<p>While it may seem handy at first, it promotes a habit of writing
+unthoughtful commit messages. By editing your commit message in a full
+editor you will spend more time thinking about your commit message.</p>
+</li>
+<li><p><strong>Spend time reviewing code yourself</strong></p>
 <p>If you are actively participating in a project, spend some time reviewing
 code on that project even if you are not a maintainer or committer on the
-project. This is the best way for you to quickly learn the best practices
-of not only the project but also what we discussed here as it is easier to
+project. This is the best way for you to quickly learn the best practices of
+not only the project but also what we discussed here as it is easier to
 understand the hardships of a code reviewer if you are one yourself.</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="section" id="poor-man-s-automated-release-notes">
-<h2><a class="toc-backref" href="#id5">Poor man’s automated release notes</a><a class="headerlink" href="#poor-man-s-automated-release-notes" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id7">Poor man’s automated release notes</a><a class="headerlink" href="#poor-man-s-automated-release-notes" title="Permalink to this headline">¶</a></h2>
 <p>To prove a point that well defined commit messages can be useful. One way to
 take advantage of a repo that follows the best practices is to automate
 generation of release notes with commit messages.</p>
@@ -466,7 +490,7 @@ package:</p>
 </ol>
 </div>
 <div class="section" id="troubleshooting-and-debugging">
-<h2><a class="toc-backref" href="#id6">Troubleshooting and debugging</a><a class="headerlink" href="#troubleshooting-and-debugging" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id8">Troubleshooting and debugging</a><a class="headerlink" href="#troubleshooting-and-debugging" title="Permalink to this headline">¶</a></h2>
 <p>Commit messages are also great for quickly troubleshooting an issue if some
 change broke our project in an unexpected way. If commit messages are well
 formed, developers can review the git log to quickly identify which changes
@@ -488,11 +512,22 @@ descriptive enough that allowed us to narrow down to this commit to identify
 the issue and revert and release a hotfix.</p>
 </div>
 <div class="section" id="tools-for-commit-review">
-<h2><a class="toc-backref" href="#id7">Tools for commit review</a><a class="headerlink" href="#tools-for-commit-review" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id9">Tools for commit review</a><a class="headerlink" href="#tools-for-commit-review" title="Permalink to this headline">¶</a></h2>
+<div class="contents local topic" id="id1">
+<ul class="simple">
+<li><p><a class="reference internal" href="#git-status" id="id12">git status</a></p></li>
+<li><p><a class="reference internal" href="#git-log" id="id13">git log</a></p></li>
+<li><p><a class="reference internal" href="#git-diff" id="id14">git diff</a></p></li>
+<li><p><a class="reference internal" href="#gitk" id="id15">gitk</a></p></li>
+<li><p><a class="reference internal" href="#history-of-specific-path" id="id16">History of specific path</a></p></li>
+<li><p><a class="reference internal" href="#commit-ranges" id="id17">Commit ranges</a></p></li>
+</ul>
+</div>
 <div class="section" id="git-status">
-<h3>git status<a class="headerlink" href="#git-status" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id12">git status</a><a class="headerlink" href="#git-status" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> command is a useful command for showing the current state
-of your Git directory. Showing the relation between your <a class="reference internal" href="glossary.html#term-worktree"><span class="xref std std-term">Worktree</span></a>.</p>
+of your Git directory. Showing the relation between your <a class="reference internal" href="glossary.html#term-Worktree"><span class="xref std std-term">Worktree</span></a> and
+the Local Repository.</p>
 <p><strong>git status: brand new repo</strong></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>On branch master
 
@@ -537,7 +572,7 @@ Changes to be committed:
 </div>
 </div>
 <div class="section" id="git-log">
-<h3>git log<a class="headerlink" href="#git-log" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id13">git log</a><a class="headerlink" href="#git-log" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> command is useful for inspecting the branch history.
 This command unfortunately is only as useful as participants on the project
 make it. See <a class="reference internal" href="#deeper-look-into-commits"><span class="std std-ref">Deeper look into commits</span></a> for best
@@ -559,7 +594,7 @@ returning the results from the parent commit until the 2nd reference point.</p>
 <p>Try reversing the 2 reference points and see how the log changes.</p>
 </div>
 <div class="section" id="git-diff">
-<h3>git diff<a class="headerlink" href="#git-diff" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id14">git diff</a><a class="headerlink" href="#git-diff" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> command is useful for checking out what changed between 2
 commit points. Try the following:</p>
 <ul class="simple">
@@ -570,19 +605,51 @@ commit points. Try the following:</p>
 </ul>
 </div>
 <div class="section" id="gitk">
-<h3>gitk<a class="headerlink" href="#gitk" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id15">gitk</a><a class="headerlink" href="#gitk" title="Permalink to this headline">¶</a></h3>
 <p>This is the default Git GUI that comes with standard Git. It’s a powerful
 GUI based viewer to allow you to see the state of the local Git repo. It’s
 a combination of <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> put together into a single
 easy to navigate viewer.</p>
-<div class="figure align-default" id="id3">
+<div class="figure align-default" id="id4">
 <img alt="gitk" src="_images/gitk.png" />
-<p class="caption"><span class="caption-text">gitk - Graphical history viewer</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text">gitk - Graphical history viewer</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
 </div>
+</div>
+<div class="section" id="history-of-specific-path">
+<h3><a class="toc-backref" href="#id16">History of specific path</a><a class="headerlink" href="#history-of-specific-path" title="Permalink to this headline">¶</a></h3>
+<p>Many Git commands support the ability to look up the history of specific
+paths. Whether it be a directory or individual files.</p>
+<ul class="simple">
+<li><p>gitk – README</p></li>
+<li><p>gitk – src/</p></li>
+<li><p>git diff – README</p></li>
+<li><p>git log – src/</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">--</span></code> is necessary if you are looking for details on a path that was
+removed from current commits.</p>
+</div>
+<div class="section" id="commit-ranges">
+<h3><a class="toc-backref" href="#id17">Commit ranges</a><a class="headerlink" href="#commit-ranges" title="Permalink to this headline">¶</a></h3>
+<p>Many Git commands also support the ability to pass ranges using <code class="docutils literal notranslate"><span class="pre">from..to</span></code>
+notation. This is useful if you want to know what’s different between 2
+branches.</p>
+<p><strong>Double dot notation</strong> The double dot notation tells Git to show you only
+commits that are in the 2nd parameter that is not common to both.</p>
+<p><strong>Triple dot notation</strong> The triple dot notation tells Git to show you commits
+from both parameters that are not common.</p>
+<div class="figure align-default" id="id5">
+<img alt="Git history with work branch" src="_images/git-branch-basic.png" />
+<p class="caption"><span class="caption-text">Git history with work branch</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<p>Examples:</p>
+<ul class="simple">
+<li><p>gitk 1.0..2.0</p></li>
+<li><p>git log –no-merges –pretty=format:”%h %&lt;(20) %an %s” 2.2.0..2.2.1</p></li>
+</ul>
 </div>
 </div>
 <div class="section" id="demo-committing-and-amending">
-<h2><a class="toc-backref" href="#id8">Demo: Committing and amending</a><a class="headerlink" href="#demo-committing-and-amending" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id10">Demo: Committing and amending</a><a class="headerlink" href="#demo-committing-and-amending" title="Permalink to this headline">¶</a></h2>
 <p>First let’s create a file that we can use to commit and amend.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
 
@@ -623,7 +690,7 @@ git commit --amend
 <p>Alternatively you can manually enter the Sign-off-by line with your editor.</p>
 </div>
 <div class="section" id="commit-mesages-key-takeaways">
-<h2><a class="toc-backref" href="#id9">Commit Mesages: Key Takeaways</a><a class="headerlink" href="#commit-mesages-key-takeaways" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id11">Commit Mesages: Key Takeaways</a><a class="headerlink" href="#commit-mesages-key-takeaways" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Make your commit messages meaningful</p></li>
 <li><p>Commit messages can be used to quickly diagnose issues or even automation</p></li>

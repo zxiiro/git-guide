@@ -37,7 +37,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="The building blocks of Git" href="building-blocks.html" /> 
+    <link rel="next" title="Basic Revision Control" href="basic-revision-control.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -79,6 +79,12 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="basic-revision-control.html">Basic Revision Control</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="basic-revision-control.html#first-iteration-of-revision-control">First iteration of revision control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic-revision-control.html#second-iteration-of-revision-control">Second iteration of revision control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic-revision-control.html#modern-revision-control">Modern Revision control</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="building-blocks.html">The building blocks of Git</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="building-blocks.html#overview-of-the-git-directory">Overview of the Git directory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="building-blocks.html#the-git-object-model">The Git Object Model</a></li>
@@ -98,6 +104,15 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="dev-lifecycle.html">Development lifecycle: Branches and Tags</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="dev-lifecycle.html#worktree-management">Worktree management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev-lifecycle.html#git-references">Git References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev-lifecycle.html#working-with-branches-and-tags">Working with Branches and Tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev-lifecycle.html#code-merges-3-types-of-merges">Code Merges: 3 types of merges</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="remotes.html">Working with remotes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="remotes.html#git-remote-commands">Git Remote Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remotes.html#git-workflows">Git Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remotes.html#resolving-merge-conflicts">Resolving merge conflicts</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
@@ -162,7 +177,7 @@
   
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
-        <a href="building-blocks.html" class="btn btn-neutral float-right" title="The building blocks of Git" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="basic-revision-control.html" class="btn btn-neutral float-right" title="Basic Revision Control" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
   </div>
@@ -175,18 +190,25 @@
   <div class="section" id="git-a-follow-along-guide">
 <h1>Git, a follow along guide<a class="headerlink" href="#git-a-follow-along-guide" title="Permalink to this headline">¶</a></h1>
 <p>Git is a distributed revision control system. At it’s most basic level it
-tracks the historical changes in contents of files over time.</p>
+saves the state of your source code at various points in time. This allows
+a developer to track the historical changes in contents of files over time.</p>
 <p>It’s distributed nature means everyone working on a project has their own
-separate offline copy of all of the code allowing folks to work on the same
-project in parallel.</p>
+separate offline copy of all of the code history allowing folks to work on
+the same project in parallel and occassionally syncing up with each other.</p>
 <p>Git is probably the single most important skill for anyone working in
 technology today on any kind of collaborative project. If you are struggling
 to use Git you will be limited in your ability to collaborate with others.</p>
-<p>Throughout the course of this Guide, I hope to pass on some knowledge that
+<p>Throughout the course of this guide, I hope to pass on some knowledge that
 will help you more effectively use Git and hopefully be interesting to both
 newbies as well as veterans of Git.</p>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="basic-revision-control.html">Basic Revision Control</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="basic-revision-control.html#first-iteration-of-revision-control">First iteration of revision control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic-revision-control.html#second-iteration-of-revision-control">Second iteration of revision control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic-revision-control.html#modern-revision-control">Modern Revision control</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="building-blocks.html">The building blocks of Git</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="building-blocks.html#overview-of-the-git-directory">Overview of the Git directory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="building-blocks.html#the-git-object-model">The Git Object Model</a></li>
@@ -206,6 +228,15 @@ newbies as well as veterans of Git.</p>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="dev-lifecycle.html">Development lifecycle: Branches and Tags</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="dev-lifecycle.html#worktree-management">Worktree management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev-lifecycle.html#git-references">Git References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev-lifecycle.html#working-with-branches-and-tags">Working with Branches and Tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev-lifecycle.html#code-merges-3-types-of-merges">Code Merges: 3 types of merges</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="remotes.html">Working with remotes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="remotes.html#git-remote-commands">Git Remote Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remotes.html#git-workflows">Git Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remotes.html#resolving-merge-conflicts">Resolving merge conflicts</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
@@ -221,7 +252,7 @@ newbies as well as veterans of Git.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="building-blocks.html" class="btn btn-neutral float-right" title="The building blocks of Git" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="basic-revision-control.html" class="btn btn-neutral float-right" title="Basic Revision Control" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
     </div>

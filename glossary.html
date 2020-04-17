@@ -37,7 +37,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Development lifecycle: Branches and Tags" href="dev-lifecycle.html" /> 
+    <link rel="prev" title="Working with remotes" href="remotes.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -79,6 +79,12 @@
             
             
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="basic-revision-control.html">Basic Revision Control</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="basic-revision-control.html#first-iteration-of-revision-control">First iteration of revision control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic-revision-control.html#second-iteration-of-revision-control">Second iteration of revision control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic-revision-control.html#modern-revision-control">Modern Revision control</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="building-blocks.html">The building blocks of Git</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="building-blocks.html#overview-of-the-git-directory">Overview of the Git directory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="building-blocks.html#the-git-object-model">The Git Object Model</a></li>
@@ -98,6 +104,15 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="dev-lifecycle.html">Development lifecycle: Branches and Tags</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="dev-lifecycle.html#worktree-management">Worktree management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev-lifecycle.html#git-references">Git References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev-lifecycle.html#working-with-branches-and-tags">Working with Branches and Tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev-lifecycle.html#code-merges-3-types-of-merges">Code Merges: 3 types of merges</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="remotes.html">Working with remotes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="remotes.html#git-remote-commands">Git Remote Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remotes.html#git-workflows">Git Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remotes.html#resolving-merge-conflicts">Resolving merge conflicts</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Glossary</a></li>
@@ -163,7 +178,7 @@
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
       
-        <a href="dev-lifecycle.html" class="btn btn-neutral float-left" title="Development lifecycle: Branches and Tags" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="remotes.html" class="btn btn-neutral float-left" title="Working with remotes" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
   </div>
   
@@ -175,22 +190,22 @@
   <div class="section" id="glossary">
 <h1>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h1>
 <dl class="glossary simple">
-<dt id="term-blob-object">Blob object</dt><dd><p>Represents the contents of a file.</p>
+<dt id="term-Blob-object">Blob object</dt><dd><p>Represents the contents of a file.</p>
 </dd>
-<dt id="term-commit-object">Commit object</dt><dd><p>Represents a snapshot of the state and point in time in the repo
-history. Contains a <a class="reference internal" href="#term-tree-object"><span class="xref std std-term">Tree object</span></a>.</p>
+<dt id="term-Commit-object">Commit object</dt><dd><p>Represents a snapshot of the state and point in time in the repo
+history. Contains a <a class="reference internal" href="#term-Tree-object"><span class="xref std std-term">Tree object</span></a>.</p>
 </dd>
-<dt id="term-object-database">Object database</dt><dd><p>The Git database located in <code class="docutils literal notranslate"><span class="pre">.git/objects/</span></code> containing a key-value
+<dt id="term-Object-database">Object database</dt><dd><p>The Git database located in <code class="docutils literal notranslate"><span class="pre">.git/objects/</span></code> containing a key-value
 store of all the objects in Git.</p>
 </dd>
-<dt id="term-tag-object">Tag object</dt><dd><p>Represents a easy to remember reference to a particular Git Object.
-Often used to tag a <a class="reference internal" href="#term-commit-object"><span class="xref std std-term">Commit object</span></a>.</p>
+<dt id="term-Tag-object">Tag object</dt><dd><p>Represents a easy to remember reference to a particular Git Object.
+Often used to tag a <a class="reference internal" href="#term-Commit-object"><span class="xref std std-term">Commit object</span></a>.</p>
 </dd>
-<dt id="term-tree-object">Tree object</dt><dd><p>Represents the state of files in a directory. Can contain
-<a class="reference internal" href="#term-blob-object"><span class="xref std std-term">Blob objects</span></a> and
-<a class="reference internal" href="#term-tree-object"><span class="xref std std-term">Tree objects</span></a>.</p>
+<dt id="term-Tree-object">Tree object</dt><dd><p>Represents the state of files in a directory. Can contain
+<a class="reference internal" href="#term-Blob-object"><span class="xref std std-term">Blob objects</span></a> and
+<a class="reference internal" href="#term-Tree-object"><span class="xref std std-term">Tree objects</span></a>.</p>
 </dd>
-<dt id="term-worktree">Worktree</dt><dd><p>A directory containing the checked out files from a Git repository.
+<dt id="term-Worktree">Worktree</dt><dd><p>A directory containing the checked out files from a Git repository.
 This is typically where you modify and update files before checking
 in your changes to the Git repo.</p>
 </dd>
@@ -206,7 +221,7 @@ in your changes to the Git repo.</p>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="dev-lifecycle.html" class="btn btn-neutral float-left" title="Development lifecycle: Branches and Tags" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="remotes.html" class="btn btn-neutral float-left" title="Working with remotes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
