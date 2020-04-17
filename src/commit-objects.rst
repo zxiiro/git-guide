@@ -14,7 +14,7 @@ In this section we will take a deeper dive into Git Objects themselves as well
 as explore what makes a great **Commit Message** when preparing a commit for
 public review.
 
-.. figure:: img/git-object-commit.png
+.. figure:: img/git-object-commit.svg
    :alt: Commit object
 
    Commit object

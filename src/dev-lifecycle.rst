@@ -19,7 +19,7 @@ Worktree management
 The ``.gitignore`` file is a special file that can be checked into your Git
 repo to tell the Git client to ignore **tracking** certain files.
 
-As mentioned in the :ref:`building-blocks:Local Repository` section there is
+As mentioned in the :ref:`core-concepts:Git Directory` section there is
 also a ``.git/info/excludes`` file which can also be used to ignore files
 however this file is not shared in Git so any changes here will only affect
 your local work. Typically folks will use ``.gitignore`` as it can be shared

@@ -22,7 +22,7 @@ newbies as well as veterans of Git.
     :maxdepth: 2
 
     basic-revision-control
-    building-blocks
+    core-concepts
     commit-objects
     dev-lifecycle
     remotes
