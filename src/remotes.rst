@@ -333,8 +333,3 @@ It is considered good practice to redownload your change every time you work
 on it in Gerrit because other team members could updaet your code since you
 last worked on it. If you are 100% sure you are the only one that's worked on
 it since last time you can skip the fetch component.
-
-
-Resolving merge conflicts
--------------------------
-

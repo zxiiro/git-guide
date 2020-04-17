@@ -26,4 +26,5 @@ newbies as well as veterans of Git.
     commit-objects
     dev-lifecycle
     remotes
+    merge-conflicts
     glossary
