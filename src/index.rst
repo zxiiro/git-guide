@@ -24,7 +24,8 @@ newbies as well as veterans of Git.
     basic-revision-control
     core-concepts
     commit-objects
-    dev-lifecycle
     remotes
+    dev-lifecycle
     merge-conflicts
+    workflows
     glossary
