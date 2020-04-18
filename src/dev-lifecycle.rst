@@ -254,7 +254,7 @@ Repository into our Worktree.
 git-branch
 ^^^^^^^^^^
 
-.. figure:: img/git-branch-basic.png
+.. figure:: img/git-branch-basic.svg
     :alt: Branching
 
     Branching
