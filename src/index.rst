@@ -25,7 +25,6 @@ newbies as well as veterans of Git.
     core-concepts
     commit-objects
     remotes
-    dev-lifecycle
-    merge-conflicts
+    branch-tags
     workflows
     glossary
