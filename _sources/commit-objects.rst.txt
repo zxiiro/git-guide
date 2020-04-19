@@ -10,11 +10,11 @@ commits with poorly defined messages are created and submitted to Git repos
 that make it difficult to later troubleshoot or sometimes automate tasks with
 Git.
 
-In this section we will take a deeper dive into Git Objects themselves as well
-as explore what makes a great **Commit Message** when preparing a commit for
-public review.
+In this section we will take a deeper dive into
+:term:`Commit Objects <Commit object>` themselves as well as explore what makes
+a great **Commit Message** when preparing a commit for public review.
 
-.. figure:: img/git-object-commit.png
+.. figure:: img/git-object-commit.svg
    :alt: Commit object
 
    Commit object
@@ -29,9 +29,11 @@ Topics:
 Writing a great commit message
 ------------------------------
 
-Similar to email, a commit message has a subject line and a body which
-is separated by a blank line. Do not write your entire commit message in the
-subject line.
+Git was designed to work over email and similarly, a commit message has a
+subject line and a body which is separated by a blank line. Do not write your
+entire commit message in the subject line.
+
+A commit message structure:
 
 .. code-block:: none
 
@@ -104,7 +106,7 @@ Bad examples:
 - Adding view for the Delivery Pipeline Plugin (**Not imperative mood**)
 - test non-default value of attach-build-log (**Uncapitalized first letter**)
 - Remove deprecated 'extended-choice' property. (**Ends in period**)
-- Fix docs build issue (**Too vague**)
+- Fix build issue (**Too vague**)
 
 
 The commit body
@@ -168,19 +170,27 @@ Good example B:
     Change-Id: Id1ede4a6a51a231f60a39bfaefbadd8f849076e4
 
 
-Commit message footer
-^^^^^^^^^^^^^^^^^^^^^
+Commit message trailer
+^^^^^^^^^^^^^^^^^^^^^^
 
-The final block of a commit message is a commit message footer. Similar to
-email it's where you sign off on your message as well as include other useful
-metadata. Typically for references to issues or links to pages for additional
+The final block of a commit message is for trailers. Similar to email it is
+where you sign off on your message as well as include other useful metadata.
+Typically for references to issues or links to pages for additional
 information.
+
+Best Practices:
+
+* Use the form ``Key: Value`` when entering trailers
+* Make sure the last block has no blank lines in between entries
+* If there is a relevant issue, always refer to it here
+* Give credit via ``Co-authored-by`` to other folks who worked on this commit
 
 Example:
 
 .. code-block:: none
 
     Issue: ABC-123
+    Ref: https://example.com/blog-about-issue
     Change-Id: Iaa40ef0377409e08e6efd41aa967249f9d3c4xyz
     Co-authored-by: Bob <bob@example.com>
     Signed-off-by: Tim <tim@example.com>
@@ -246,15 +256,18 @@ Be careful about the sign-off rules on the projects you are contributing to
 and make sure you understand what the sign-off means in case the project you
 are contributing to has a document similar to this.
 
+Refer to the manpage for ``git-interpret-trailers`` for more details on
+trailers.
+
 
 Final tips on commit messages
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * **Resist the urge to use** ``git commit -m``
 
-  While it may seem handy at first, it promotes a habit of writing
-  unthoughtful commit messages. By editing your commit message in a full
-  editor you will spend more time thinking about your commit message.
+  While it may seem handy, it promotes a habit of writing unthoughtful commit
+  messages. By editing your commit message in a full editor you will spend more
+  time thinking about your commit message, producing higher quality messages.
 
 * **Spend time reviewing code yourself**
 
@@ -357,8 +370,8 @@ descriptive enough that allowed us to narrow down to this commit to identify
 the issue and revert and release a hotfix.
 
 
-Tools for commit review
------------------------
+Tools for reading commits
+-------------------------
 
 .. contents::
     :local:
@@ -369,8 +382,8 @@ git status
 ^^^^^^^^^^
 
 The ``git status`` command is a useful command for showing the current state
-of your Git directory. Showing the relation between your :term:`Worktree` and
-the Local Repository.
+of your :term:`Git Repository`. Showing the relation between your
+:term:`Worktree` and the :term:`Git Database`.
 
 
 **git status: brand new repo**
@@ -391,6 +404,8 @@ the Local Repository.
     On branch master
     nothing to commit, working tree clean
 
+* No changes since HEAD
+
 
 **git status: untracked file**
 
@@ -403,6 +418,8 @@ the Local Repository.
         abc
 
     nothing added to commit but untracked files present (use "git add" to track)
+
+* New file detected that is not yet tracked in the :term:`Git Database`
 
 
 **git status: modified file**
@@ -418,6 +435,7 @@ the Local Repository.
 
     no changes added to commit (use "git add" and/or "git commit -a")
 
+* File is tracked in the :term:`Git Database` and has been modified since HEAD
 
 **git status: staged file**
 
@@ -429,31 +447,26 @@ the Local Repository.
 
         new file:   abc
 
+* There is a change staged in the :term:`Git Index` that is not yet committed
+
 
 git log
 ^^^^^^^
 
-The ``git log`` command is useful for inspecting the branch history.
-This command unfortunately is only as useful as participants on the project
-make it. See :ref:`commit-objects:Deeper look into commits` for best
-practices on managing your commit message.
+The ``git log`` command is useful for inspecting the branch history. This
+command is only as useful as participants on the project make it. See
+:ref:`commit-objects:Writing a great commit message` for best practices on
+managing your commit message.
 
 Check the log of the projects you work on often and try to see if you can
 understand the progress of the project from the log. Use the following log
 commands and explore the differences:
 
-* git log
-* git shortlog
-* git log 1.0.0..2.0.0
+.. code-block:: bash
 
-Many Git commands support passing a commit range to tell Git to show you what
-changes are in the 2nd reference point that's not in the 1st reference point.
-What Git is doing in this case is taking the 2 commits as a starting point,
-then walk through the commit history looking for a common ancestor or parent
-commit. Then it uses the commit parent as the starting point of history and
-returning the results from the parent commit until the 2nd reference point.
-
-Try reversing the 2 reference points and see how the log changes.
+    git log
+    git shortlog
+    git log path/to/file
 
 
 git diff
@@ -462,10 +475,18 @@ git diff
 The ``git diff`` command is useful for checking out what changed between 2
 commit points. Try the following:
 
-* git diff
-* git diff HEAD~1
-* git diff origin/master
-* git diff BranchA BranchB
+.. code-block:: bash
+
+    git diff
+    git diff HEAD~1
+    git diff origin/master
+    git diff BranchA BranchB
+
+* ``git diff`` with no parameters shows you the diff between your
+  :term:`Worktree` and the current :term:`Git Index`
+* ``git diff [COMMIT]`` shows you the diff between your :term:`Worktree`
+  relative to the COMMIT provided
+* ``git diff A B`` shows you the diff between commit A and commit B
 
 
 gitk
@@ -481,12 +502,20 @@ easy to navigate viewer.
 
    gitk - Graphical history viewer
 
+Similarly to ``git diff`` you can also pass different commits for comparison.
+
+.. code-block:: bash
+
+    gitk
+    gitk path/to/file
+    gitk A B
+
 
 History of specific path
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Many Git commands support the ability to look up the history of specific
-paths. Whether it be a directory or individual files.
+Many Git commands support the ability to look up the history of specific paths.
+Whether it be a directory or individual files.
 
 * gitk -- README
 * gitk -- src/
@@ -500,7 +529,11 @@ removed from current commits.
 Commit ranges
 ^^^^^^^^^^^^^
 
-Many Git commands also support the ability to pass ranges using ``from..to``
+.. figure:: img/git-branch-basic.svg
+
+   Commit timeline of 2 branches
+
+Many Git commands also support the ability to pass ranges using ``FROM..TO``
 notation. This is useful if you want to know what's different between 2
 branches.
 
@@ -509,11 +542,6 @@ commits that are in the 2nd parameter that is not common to both.
 
 **Triple dot notation** The triple dot notation tells Git to show you commits
 from both parameters that are not common.
-
-.. figure:: img/git-branch-basic.png
-   :alt: Git history with work branch
-
-   Git history with work branch
 
 Examples:
 
@@ -562,6 +590,9 @@ First let's create a file that we can use to commit and amend.
 
     git commit --amend
 
+* Note that when amending a commit the Author and Author Date does not change
+* The Committer and Committer Date always gets updated
+
 
 **Signing off on your commit**
 
@@ -571,9 +602,24 @@ First let's create a file that we can use to commit and amend.
 
 Alternatively you can manually enter the Sign-off-by line with your editor.
 
+.. tip::
+
+    Avoid ALWAYS passing ``-s``, instead make a concious choice if you need to
+    or not. This prevents accidental double sign-offs.
+
+    If you really must, then use ``git commit -s`` but don't use ``--amend -s``
+    together. If you already signed the first time, you don't need to sign
+    again when you amend.
+
 
 Commit Mesages: Key Takeaways
 -----------------------------
 
-* Make your commit messages meaningful
-* Commit messages can be used to quickly diagnose issues or even automation
+* Make your commit message summary short and meaningful
+* Make your commit message body descriptive, answering what and why the change
+  is needed
+* Use ``git status``, ``gitk``, ``git log``, and ``git diff`` to inspect
+  commits
+* Track history of a single file with ``command -- path/to/file``
+* Track history of a range of commits with ``command FROM..TO`` notation
+* Sign-off your commits once, avoid automatic ``--amend -s`` sign-offs
