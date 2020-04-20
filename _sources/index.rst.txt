@@ -26,6 +26,5 @@ newbies as well as veterans of Git.
     commit-objects
     remotes
     branch-tags
-    merge-conflicts
     workflows
     glossary
