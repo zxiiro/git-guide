@@ -1,0 +1,450 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Git Workflows &mdash; Git - a follow along guide  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://www.zxiiro.ca/git-guideworkflows.html"/>
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Glossary" href="glossary.html" />
+    <link rel="prev" title="Git References: Branches and Tags" href="branch-tags.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Git - a follow along guide
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="basic-revision-control.html">Basic Revision Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core-concepts.html">Git Core Concepts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="core-concepts.html#the-git-repository">The Git Repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core-concepts.html#the-git-object-model">The Git Object Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core-concepts.html#demo-working-with-the-git-directory">Demo: Working with the Git Directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core-concepts.html#demo-working-with-multiple-worktrees">Demo: Working with multiple Worktrees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core-concepts.html#git-core-concepts-key-takeaways">Git Core Concepts: Key Takeaways</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="commit-objects.html">Deeper look into commits</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="commit-objects.html#writing-a-great-commit-message">Writing a great commit message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-objects.html#poor-man-s-automated-release-notes">Poor man’s automated release notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-objects.html#troubleshooting-and-debugging">Troubleshooting and debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-objects.html#tools-for-reading-commits">Tools for reading commits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-objects.html#demo-committing-and-amending">Demo: Committing and amending</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-objects.html#commit-mesages-key-takeaways">Commit Mesages: Key Takeaways</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="remotes.html">Working with remotes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="remotes.html#refs-remotes-vs-refs-heads">refs/remotes vs refs/heads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remotes.html#git-remote-commands">Git Remote Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remotes.html#remotes-key-takeaways">Remotes: Key Takeaways</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="branch-tags.html">Git References: Branches and Tags</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="branch-tags.html#core-references">Core References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="branch-tags.html#accessing-references">Accessing References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="branch-tags.html#branch-and-tag-commands">Branch and Tag commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="branch-tags.html#merging-code-3-types-of-merges">Merging Code: 3 types of merges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="branch-tags.html#merging-code-resolving-merge-conflicts">Merging Code: Resolving merge conflicts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="branch-tags.html#git-references-key-takeaways">Git References: Key Takeaways</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Git Workflows</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#email-workflow">Email Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pull-request-workflow">Pull Request Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#patchset-workflow">Patchset Workflow</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Git - a follow along guide</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Git Workflows</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/workflows.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="glossary.html" class="btn btn-neutral float-right" title="Glossary" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="branch-tags.html" class="btn btn-neutral float-left" title="Git References: Branches and Tags" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="git-workflows">
+<h1>Git Workflows<a class="headerlink" href="#git-workflows" title="Permalink to this headline">¶</a></h1>
+<p>In my experience with Git I have seen 3 types of workflows developers might
+use to collaborate on a project.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#email-workflow" id="id5">Email Workflow</a></p></li>
+<li><p><a class="reference internal" href="#pull-request-workflow" id="id6">Pull Request Workflow</a></p></li>
+<li><p><a class="reference internal" href="#patchset-workflow" id="id7">Patchset Workflow</a></p></li>
+</ul>
+</div>
+<div class="section" id="email-workflow">
+<h2><a class="toc-backref" href="#id5">Email Workflow</a><a class="headerlink" href="#email-workflow" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-default" id="id2">
+<img alt="_images/git-workflow-email.svg" src="_images/git-workflow-email.svg" /><p class="caption"><span class="caption-text">Workflow: Email</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>This is the workflow utilized by the Linux Kernel project. Git was designed
+with email in mind.</p>
+<p>Pros:</p>
+<ul class="simple">
+<li><p>Requires less infrastructure</p></li>
+<li><p>No account required</p></li>
+</ul>
+<p>Cons:</p>
+<ul class="simple">
+<li><p>Uncommon workflow</p></li>
+<li><p>Not easy to review without specialized tools</p></li>
+</ul>
+<p>The email workflow is also a really handy way to share work with colleagues
+without needing to setup any specific infrastructure or if you are stuck
+behind a firewall that’s blocking your remote repos this can get around that.</p>
+<p>This workflow leaves it up to the committer decide how they want the patches
+merged via Merge Commit, or Fast-Forward, or Rebased, etc…</p>
+<p>Workflow Commands:</p>
+<div class="contents local topic" id="id1">
+<ul class="simple">
+<li><p><a class="reference internal" href="#git-format-patch" id="id8">git format-patch</a></p></li>
+<li><p><a class="reference internal" href="#git-apply" id="id9">git apply</a></p></li>
+<li><p><a class="reference internal" href="#git-am" id="id10">git am</a></p></li>
+</ul>
+</div>
+<div class="section" id="git-format-patch">
+<h3><a class="toc-backref" href="#id8">git format-patch</a><a class="headerlink" href="#git-format-patch" title="Permalink to this headline">¶</a></h3>
+<p>This command is used to create a ascii based <code class="docutils literal notranslate"><span class="pre">*.patch</span></code> files containing your
+commits. One commit per patch file and each patch file is in unix mailbox
+format (basically an email).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git format-patch <span class="o">[</span>reference<span class="o">]</span>
+git format-patch origin/master
+</pre></div>
+</div>
+<p>When using this command <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">format-patch</span></code> will create patch files for all
+commits since the reference point. The file names contain the numerical order
+the patches should be merged in.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>0001-Update-homepage.patch
+0002-Import-jobs-from-project-config.patch
+0003-Fix-gerrit-code-review-plugin-name.patch
+0004-Enable-docs-linkcheck.patch
+0005-Add-support-for-opsgenie-notification-plugin.patch
+0006-Experimental-support-for-filterChecks-trait.patch
+0007-Fix-authorization-property-issue.patch
+0008-Update-Jenkins-wiki-plugins-URLs.patch
+0009-Update-Jenkins-wiki-plugins-URLs-builders.patch
+0010-Fix-links-causing-redirects.patch
+0011-Update-Jenkins-wiki-plugins-URLs.patch
+0012-Update-Jenkins-wiki-plugins-URLs-parameters.patch
+0013-Update-Jenkins-wiki-plugins-URLs.patch
+0014-Ignore-py-obj-warnings-and-fail-on-warnings.patch
+0015-Re-order-some-XML-attributes-to-preserve-ordering.patch
+0016-Fix-some-typos-in-documentation.patch
+0017-conditional-publisher-sort-publisher-attributes-alph.patch
+0018-Adding-view-for-the-Delivery-Pipeline-Plugin.patch
+0019-Add-support-for-become-in-ansible-playbook.patch
+0020-Fix-zuul-parameters-anchor-link.patch
+</pre></div>
+</div>
+<p>With these patches you can attach them to an email and send it out to the team.</p>
+</div>
+<div class="section" id="git-apply">
+<h3><a class="toc-backref" href="#id9">git apply</a><a class="headerlink" href="#git-apply" title="Permalink to this headline">¶</a></h3>
+<p>Git apply takes a <code class="docutils literal notranslate"><span class="pre">*.patch</span></code> file and applies the file changes to the repo.
+This command ignores any commit messages and metadata as it is only concerned
+about file changes. It is better to use the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">am</span></code> command instead to
+apply commit patches.</p>
+</div>
+<div class="section" id="git-am">
+<h3><a class="toc-backref" href="#id10">git am</a><a class="headerlink" href="#git-am" title="Permalink to this headline">¶</a></h3>
+<p>This command takes <code class="docutils literal notranslate"><span class="pre">*.patch</span></code> files in mailbox format and merges the commits
+to the current branch.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git am *.patch
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="pull-request-workflow">
+<h2><a class="toc-backref" href="#id6">Pull Request Workflow</a><a class="headerlink" href="#pull-request-workflow" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-default" id="id3">
+<img alt="_images/git-workflow-patchset.svg" src="_images/git-workflow-patchset.svg" /><p class="caption"><span class="caption-text">Workfow: Pull Request</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<p>The Pull Request (PR) Workflow was popularized by GitHub and is used in
+services such as BitBucket and GitLab as well.</p>
+<p>Typically in the PR Workflow we would work on a side-branch for the task at
+hand and push this side branch to a remote such as GitHub to share. Then inform
+the project where your branch is and tell them to review and merge your branch.</p>
+<p>Pros:</p>
+<ul class="simple">
+<li><p>Common workflow</p></li>
+<li><p>Arguably easier workflow</p></li>
+</ul>
+<p>Cons:</p>
+<ul class="simple">
+<li><p>Encourages bad practices (undescriptive commit messages)</p></li>
+<li><p>Messy commit history</p></li>
+<li><p>Difficult for collaborators to update your PR</p></li>
+</ul>
+<p><strong>Creating a new PR</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git fetch origin
+git checkout -b mywork origin/master
+
+<span class="c1"># edit files</span>
+
+git add path/to/files
+git commit
+git push origin mybranch
+
+<span class="c1"># In GitHub / BitBucket UI create a Pull Request using mybranch</span>
+</pre></div>
+</div>
+<p><strong>Updating an existing PR</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout mywork
+
+<span class="c1"># edit files</span>
+
+git add path/to/files
+git commit
+git push origin mybranch
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>You do not necessarily have to do it this way but it is the way GitHub
+encourages</p></li>
+<li><p>It is possible to also do the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">--amend</span></code> workflow and only
+maintain a single commit but requires <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">--force</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="patchset-workflow">
+<h2><a class="toc-backref" href="#id7">Patchset Workflow</a><a class="headerlink" href="#patchset-workflow" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-default" id="id4">
+<img alt="_images/git-workflow-patchset.svg" src="_images/git-workflow-patchset.svg" /><p class="caption"><span class="caption-text">Workflow: Patchset</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<p>This workflow is what’s used in Gerrit. In this workflow we are contributing
+a single commit as a <strong>Patchset</strong> for review. Updates to the code are done
+via amending the one commit until we reach an acceptable <strong>Patchset*</strong>.</p>
+<p>Pros:</p>
+<ul class="simple">
+<li><p>More precise commit messages</p></li>
+<li><p>Cleaner Git History</p></li>
+<li><p>Rebasing is easier</p></li>
+</ul>
+<p>Cons:</p>
+<ul class="simple">
+<li><p>Less common workflow</p></li>
+<li><p>More commands to learn (rebase, commit –amend)</p></li>
+</ul>
+<p>Typical workflows:</p>
+<p><strong>Creating a new commit</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Edit some files</span>
+git add path/to/file
+git commit
+git push origin HEAD:refs/for/master
+</pre></div>
+</div>
+<p>If you are using the <em>git-review</em> tool, the command <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">review</span> <span class="pre">master</span></code> is
+equivalent to <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">HEAD:refs/for/master</span></code>.</p>
+<p><strong>Updating an existing review</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git fetch origin refs/changes/34/88734/1
+git checkout FETCH_HEAD
+
+<span class="c1"># Update files as necessary</span>
+
+git add path/to/files
+git commit --amend       <span class="c1"># Make sure Change-Id in footer matches in Gerrit</span>
+git push origin HEAD:refs/for/master
+</pre></div>
+</div>
+<p>If you are using <em>git-review</em> tool, the command <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">review</span> <span class="pre">-d</span> <span class="pre">88734,1</span></code> is
+equivalent to <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span> <span class="pre">origin</span> <span class="pre">refs/changes/34/88734/1</span></code>.</p>
+<p>It is good practice to redownload your change every time you work on it in
+Gerrit because other team members could updaet your code since you last worked
+on it. If you are 100% sure you are the only one that’s worked on it since last
+time you can skip the fetch component.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="glossary.html" class="btn btn-neutral float-right" title="Glossary" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="branch-tags.html" class="btn btn-neutral float-left" title="Git References: Branches and Tags" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Thanh Ha
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-46385504-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,845 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Git References: Branches and Tags &mdash; Git - a follow along guide  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://www.zxiiro.ca/git-guidebranch-tags.html"/>
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Git Workflows" href="workflows.html" />
+    <link rel="prev" title="Working with remotes" href="remotes.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Git - a follow along guide
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="basic-revision-control.html">Basic Revision Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core-concepts.html">Git Core Concepts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="core-concepts.html#the-git-repository">The Git Repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core-concepts.html#the-git-object-model">The Git Object Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core-concepts.html#demo-working-with-the-git-directory">Demo: Working with the Git Directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core-concepts.html#demo-working-with-multiple-worktrees">Demo: Working with multiple Worktrees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core-concepts.html#git-core-concepts-key-takeaways">Git Core Concepts: Key Takeaways</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="commit-objects.html">Deeper look into commits</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="commit-objects.html#writing-a-great-commit-message">Writing a great commit message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-objects.html#poor-man-s-automated-release-notes">Poor man’s automated release notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-objects.html#troubleshooting-and-debugging">Troubleshooting and debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-objects.html#tools-for-reading-commits">Tools for reading commits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-objects.html#demo-committing-and-amending">Demo: Committing and amending</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-objects.html#commit-mesages-key-takeaways">Commit Mesages: Key Takeaways</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="remotes.html">Working with remotes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="remotes.html#refs-remotes-vs-refs-heads">refs/remotes vs refs/heads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remotes.html#git-remote-commands">Git Remote Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remotes.html#remotes-key-takeaways">Remotes: Key Takeaways</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Git References: Branches and Tags</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#core-references">Core References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#accessing-references">Accessing References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#branch-and-tag-commands">Branch and Tag commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#merging-code-3-types-of-merges">Merging Code: 3 types of merges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#merging-code-resolving-merge-conflicts">Merging Code: Resolving merge conflicts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#git-references-key-takeaways">Git References: Key Takeaways</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="workflows.html">Git Workflows</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="workflows.html#email-workflow">Email Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workflows.html#pull-request-workflow">Pull Request Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workflows.html#patchset-workflow">Patchset Workflow</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Git - a follow along guide</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Git References: Branches and Tags</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/branch-tags.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="workflows.html" class="btn btn-neutral float-right" title="Git Workflows" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="remotes.html" class="btn btn-neutral float-left" title="Working with remotes" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="git-references-branches-and-tags">
+<h1>Git References: Branches and Tags<a class="headerlink" href="#git-references-branches-and-tags" title="Permalink to this headline">¶</a></h1>
+<div class="figure align-default" id="id3">
+<img alt="_images/git-repo-branches.svg" src="_images/git-repo-branches.svg" /><p class="caption"><span class="caption-text">Branches &amp; Tags</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<p>As mentioned earlier, Git References are stored in the <code class="docutils literal notranslate"><span class="pre">.git/refs/*</span></code>
+directory. You might know them as <strong>branches</strong> and <strong>tags</strong>.
+References offer a human readable way to reference specific commits (think of
+them as bookmarks).</p>
+<p>At a rudimentary level you can create new references by simply creating files
+in the <code class="docutils literal notranslate"><span class="pre">refs/*</span></code> directories and assigning the Commit SHA that you want to
+reference. Git offers commands to handle this automatically for you.</p>
+<p>Topics:</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#core-references" id="id7">Core References</a></p></li>
+<li><p><a class="reference internal" href="#accessing-references" id="id8">Accessing References</a></p></li>
+<li><p><a class="reference internal" href="#branch-and-tag-commands" id="id9">Branch and Tag commands</a></p></li>
+<li><p><a class="reference internal" href="#merging-code-3-types-of-merges" id="id10">Merging Code: 3 types of merges</a></p></li>
+<li><p><a class="reference internal" href="#merging-code-resolving-merge-conflicts" id="id11">Merging Code: Resolving merge conflicts</a></p></li>
+<li><p><a class="reference internal" href="#git-references-key-takeaways" id="id12">Git References: Key Takeaways</a></p></li>
+</ul>
+</div>
+<div class="section" id="core-references">
+<h2><a class="toc-backref" href="#id7">Core References</a><a class="headerlink" href="#core-references" title="Permalink to this headline">¶</a></h2>
+<p>There are 4 useful reference points one should know to effectively use Git:</p>
+<div class="contents local topic" id="id1">
+<ul class="simple">
+<li><p><a class="reference internal" href="#head" id="id13">HEAD</a></p></li>
+<li><p><a class="reference internal" href="#branches" id="id14">Branches</a></p></li>
+<li><p><a class="reference internal" href="#tags" id="id15">Tags</a></p></li>
+<li><p><a class="reference internal" href="#remotes" id="id16">Remotes</a></p></li>
+</ul>
+</div>
+<div class="section" id="head">
+<h3><a class="toc-backref" href="#id13">HEAD</a><a class="headerlink" href="#head" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Stored in <code class="docutils literal notranslate"><span class="pre">.git/HEAD</span></code></p></li>
+<li><p><strong>HEAD</strong> is a special reference point that always points to your current
+location in the Git timeline</p></li>
+<li><p>Typically this is a symbolic reference to the checked out <em>branch</em></p></li>
+<li><p>In <code class="docutils literal notranslate"><span class="pre">Detached</span> <span class="pre">HEAD</span></code> points to a specific commit hash</p></li>
+<li><p>The <strong>HEAD</strong> reference will move every time <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> or
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span></code> is issued</p></li>
+</ul>
+</div>
+<div class="section" id="branches">
+<h3><a class="toc-backref" href="#id14">Branches</a><a class="headerlink" href="#branches" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Stored in <code class="docutils literal notranslate"><span class="pre">.git/refs/heads/*</span></code></p></li>
+<li><p><strong>branches</strong> are a human readable reference to a specific
+<a class="reference internal" href="glossary.html#term-Commit-object"><span class="xref std std-term">Commit object</span></a></p></li>
+<li><p>Used in a development workflow to indicate the code path
+(development, maintanence, production)</p></li>
+<li><p>The <strong>branch</strong> reference point will move every time <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> is issued</p></li>
+</ul>
+</div>
+<div class="section" id="tags">
+<h3><a class="toc-backref" href="#id15">Tags</a><a class="headerlink" href="#tags" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Stored in <code class="docutils literal notranslate"><span class="pre">.git/refs/tags/*</span></code></p></li>
+<li><p><strong>tags</strong> are human readable reference points to a specific
+<a class="reference internal" href="core-concepts.html#the-git-object-model"><span class="std std-ref">Git Object</span></a></p></li>
+<li><p>Tags are immutable meaning once a tag is created it should never be changed</p></li>
+</ul>
+<p>For this reason the most common use case for tags is to reference a release so
+that folks can refer back to the exact source code that built a particular
+release for historical reasons. Another less common use case though for tags
+is to reference specific interesting points in time. Maybe there’s an
+interesting lessons learned that you want to refer others to, or interesting
+commit that might be interesting to reference back to for historical reasons,
+we can use a tag to bookmark those commits.</p>
+<p>The <strong>tag</strong> reference point is not expected to ever move.</p>
+<p>There are 2 types of tags:</p>
+<ul class="simple">
+<li><p>Lightweight tag is similar to a branch and points to a single
+<a class="reference internal" href="core-concepts.html#the-git-object-model"><span class="std std-ref">Git object</span></a></p></li>
+<li><p>Annotated tag references a <a class="reference internal" href="glossary.html#term-Tag-object"><span class="xref std std-term">Tag object</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="remotes">
+<h3><a class="toc-backref" href="#id16">Remotes</a><a class="headerlink" href="#remotes" title="Permalink to this headline">¶</a></h3>
+<p>Stored in <code class="docutils literal notranslate"><span class="pre">.git/refs/remotes/*</span></code>, <strong>remotes</strong> are read-only copies of
+branches from another Git repository. They are read-only to you so you cannot
+update these references but they get updated when you sync via <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span></code>
+if the remote repository has moved since you lasted fetched.</p>
+<p>The <strong>remote</strong> reference points will move every time <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span></code> is issued.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You may notice that there are no such thing as remote tags, mainly because
+as mentioned earlier tags never move so tags should always be the same in
+every Git repo. When <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span> <span class="pre">--tags</span></code> is called if there are tags you
+are missing they will be created in the usual <code class="docutils literal notranslate"><span class="pre">.git/refs/tags/*</span></code>
+directory.</p>
+</div>
+</div>
+</div>
+<div class="section" id="accessing-references">
+<h2><a class="toc-backref" href="#id8">Accessing References</a><a class="headerlink" href="#accessing-references" title="Permalink to this headline">¶</a></h2>
+<p>You can access references using the full reference path or by their short
+references.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout master
+git checkout heads/master
+git checkout refs/heads/master
+</pre></div>
+</div>
+<p>All 3 commands checkout the same commit but the last 2 will put you in
+<code class="docutils literal notranslate"><span class="pre">detached</span> <span class="pre">HEAD</span></code> mode but it’s good to understand that Git is making an
+assumption on your behalf when you do not reference the full path.</p>
+<p>If you have a branch and a tag with the same name for example:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.git/refs/heads/1.0</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.git/refs/tags/1.0</span></code></p></li>
+</ul>
+<p>Git will prefer the <em>branch</em> over the <em>tag</em>. If you want the tag you will have
+to be more explicit.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ git checkout 1.0
+warning: refname &#39;1.0&#39; is ambiguous.
+Switched to branch &#39;1.0&#39;
+</pre></div>
+</div>
+<p>Apart from branches, all other checkouts will result in <code class="docutils literal notranslate"><span class="pre">detached</span> <span class="pre">HEAD</span></code> mode.
+It is recommended if you are planning to do any development make sure you
+turn it into a branch so that you can get proper tracking.</p>
+<p>When working with remotes:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout feature
+git checkout origin/feature
+git checkout refs/remotes/origin/master
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The last 2 commands checkout the same commit</p></li>
+<li><p>The first command checks out the LOCAL copy of <code class="docutils literal notranslate"><span class="pre">feature</span></code> branch</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">feature</span></code> does not exist Git will try to guess from available remotes</p></li>
+<li><p>If 2 remotes have the same branch name Git won’t checkout any branch</p></li>
+</ul>
+</div>
+<div class="section" id="branch-and-tag-commands">
+<h2><a class="toc-backref" href="#id9">Branch and Tag commands</a><a class="headerlink" href="#branch-and-tag-commands" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="git-checkout">
+<h3>git checkout<a class="headerlink" href="#git-checkout" title="Permalink to this headline">¶</a></h3>
+<p>This is the main command we can use to copy files from the
+<a class="reference internal" href="glossary.html#term-Git-Database"><span class="xref std std-term">Git Database</span></a> into our <a class="reference internal" href="glossary.html#term-Worktree"><span class="xref std std-term">Worktree</span></a>.</p>
+<p><strong>git checkout</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout master
+cat .git/HEAD
+cat .git/refs/heads/master
+
+git checkout SHA
+cat .git/HEAD
+
+<span class="c1"># Create a new commit</span>
+git add file
+git commit
+cat .git/HEAD
+
+<span class="c1"># Create a new commit on a branch</span>
+git checkout master
+cat .git/HEAD
+cat .git/refs/heads/master
+git add file
+git commit
+cat .git/HEAD
+cat .git/refs/heads/master
+</pre></div>
+</div>
+<p><strong>git checkout &amp; create branch</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout -b new-branch master
+cat .git/HEAD
+cat .git/refs/heads/new-branch
+</pre></div>
+</div>
+</div>
+<div class="section" id="git-branch">
+<h3>git branch<a class="headerlink" href="#git-branch" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-default" id="id4">
+<img alt="Branching" src="_images/git-branch-basic.svg" /><p class="caption"><span class="caption-text">Branching</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s1">&#39;a1b2c3&#39;</span> &gt; .git/refs/heads/new-branch
+git branch new-branch master
+cat .git/HEAD
+cat .git/refs/heads/new-branch
+</pre></div>
+</div>
+<p><strong>Tracking branches</strong> are useful to have your branch track another branch so
+that when you do <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> it will tell you how many commits difference
+between the 2 branches. This is typically useful when working with remotes
+which we will discuss later however can be used to track any local branch as
+well.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
+git branch -u master new-branch
+git status
+</pre></div>
+</div>
+<p>This tells Git to make <strong>new-branch</strong> track the <strong>master</strong> branch for changes.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
+git checkout new-branch
+git status
+
+git add file
+git commit
+git status
+
+git rebase -i master
+git status
+
+git checkout master
+git add file
+git commit
+git checkout new-branch
+git status
+</pre></div>
+</div>
+<p>We can see how the tracking branch affects the result of <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>.</p>
+</div>
+<div class="section" id="git-tag">
+<h3>git tag<a class="headerlink" href="#git-tag" title="Permalink to this headline">¶</a></h3>
+<p>Similar to branch we can create a tag easily and quickly with the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">tag</span></code>
+command.</p>
+<p><strong>Lightweight tag</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git tag v1.0.0
+</pre></div>
+</div>
+<p>This creates a lightweight tag that is a simple reference to a specific
+<code class="docutils literal notranslate"><span class="pre">commit</span></code> or <code class="docutils literal notranslate"><span class="pre">object</span></code>. Yes, you do not need to tag a commit you can also
+tag Blobs, Trees, and Commits.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git tag some-object SHA
+git cat-file -p some-object
+</pre></div>
+</div>
+<p>Which can be useful if you want a quick way to reference some object in the
+future.</p>
+<p><strong>Annotated tag</strong></p>
+<p>Reference back to the <a class="reference internal" href="core-concepts.html#tag-object"><span class="std std-ref">Tag object</span></a> section.</p>
+<div class="figure align-default" id="id5">
+<img alt="Commit object" src="_images/git-object-tag.svg" /><p class="caption"><span class="caption-text">Tag object</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git tag -a v2.0.0
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Creates a tag that can have additional details attached</p></li>
+<li><p>Useful to attach additional information</p>
+<ul>
+<li><p>Release notes</p></li>
+<li><p>Upgrade procedures</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="merging-code-3-types-of-merges">
+<h2><a class="toc-backref" href="#id10">Merging Code: 3 types of merges</a><a class="headerlink" href="#merging-code-3-types-of-merges" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-default" id="id6">
+<img alt="_images/git-repo-merge.svg" src="_images/git-repo-merge.svg" /><p class="caption"><span class="caption-text">Merge &amp; Rebase</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+<p>When working with Git there comes the eventual point in time where we need to
+copy code from one branch to another. This is referred to as merging code
+in Git.</p>
+<p>In Git there are 3 distinctive ways to merge code which we will discuss:</p>
+<ul class="simple">
+<li><p>Fast Forward Merges</p></li>
+<li><p>Merge Commit</p></li>
+<li><p>Rebase</p></li>
+</ul>
+<p>Each merge type results in a branch with commits from both the source branch
+and the destination branch but the order the commits appear depend on which
+type of merge is used.</p>
+<p>Contents:</p>
+<div class="contents local topic" id="id2">
+<ul class="simple">
+<li><p><a class="reference internal" href="#cherry-pick-git-cherry-pick" id="id17">Cherry Pick: git cherry-pick</a></p></li>
+<li><p><a class="reference internal" href="#fast-forward-merge-git-merge-ff-only" id="id18">Fast Forward Merge: git merge –ff-only</a></p></li>
+<li><p><a class="reference internal" href="#merge-commit-git-merge-no-ff" id="id19">Merge Commit: git merge –no-ff</a></p></li>
+<li><p><a class="reference internal" href="#rebasing-git-rebase" id="id20">Rebasing: git rebase</a></p></li>
+</ul>
+</div>
+<div class="section" id="cherry-pick-git-cherry-pick">
+<h3><a class="toc-backref" href="#id17">Cherry Pick: git cherry-pick</a><a class="headerlink" href="#cherry-pick-git-cherry-pick" title="Permalink to this headline">¶</a></h3>
+<p>Technically not a merge type but is a basic building block to copying code
+from one branch to another which is effectively what merging code is doing
+in Git.</p>
+<p>Cherry-pick lets you tell Git that you want a specific commit copied to the
+current <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> ignoring the commit’s <em>parent</em>.</p>
+<p><strong>git cherry-pick before</strong></p>
+<img alt="_images/git-branch-basic.svg" src="_images/git-branch-basic.svg" /><p>Let’s say we want to get commit <code class="docutils literal notranslate"><span class="pre">Z</span></code> from the <code class="docutils literal notranslate"><span class="pre">INFRA-123</span></code> branch ignoring
+any parents of the original commit.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout master
+git cherry-pick Z
+</pre></div>
+</div>
+<p><strong>git cherry-pick after</strong></p>
+<img alt="_images/git-branch-cherry-pick-after.svg" src="_images/git-branch-cherry-pick-after.svg" /><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
+git checkout -b add-new-file master
+
+<span class="nb">echo</span> <span class="s2">&quot;Yo&quot;</span> &gt; newfile.txt
+git add newfile.txt
+git commit
+git status
+
+git checkout -b test-cherry-pick master
+git status
+
+git cherry-pick add-new-file
+git status
+
+git log
+git diff HEAD~1
+gitk
+</pre></div>
+</div>
+</div>
+<div class="section" id="fast-forward-merge-git-merge-ff-only">
+<h3><a class="toc-backref" href="#id18">Fast Forward Merge: git merge –ff-only</a><a class="headerlink" href="#fast-forward-merge-git-merge-ff-only" title="Permalink to this headline">¶</a></h3>
+<p>A fast forward merge is a merge that is trivial that Git does not need to worry
+about managing the commit history. It is one where the branch that is merging
+in already has the current <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> as it’s parent.</p>
+<p><strong>ff-merge before</strong></p>
+<img alt="_images/git-branch-ff-merge-before.svg" src="_images/git-branch-ff-merge-before.svg" /><p><strong>ff-merge after</strong></p>
+<img alt="_images/git-branch-ff-merge-after.svg" src="_images/git-branch-ff-merge-after.svg" /><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code> will perform this merge type if <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> is the immediate
+parent</p></li>
+<li><p>Exact same commits are used, no commit hashes need to be updated</p></li>
+</ul>
+<p>Reusing the previous example but instead using <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span> <span class="pre">--ff-only</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git status
+git checkout -b test-ff-merge master
+
+gitk
+
+git merge --ff-only add-new-file
+git status
+
+git log
+git diff HEAD~1
+gitk
+</pre></div>
+</div>
+</div>
+<div class="section" id="merge-commit-git-merge-no-ff">
+<h3><a class="toc-backref" href="#id19">Merge Commit: git merge –no-ff</a><a class="headerlink" href="#merge-commit-git-merge-no-ff" title="Permalink to this headline">¶</a></h3>
+<p>A merge commit happens when a commit cannot be trivially merged, meaning the
+branch that is merging does not have <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> as it’s immediate parent.</p>
+<p><strong>merge commit before</strong></p>
+<img alt="_images/git-branch-basic.svg" src="_images/git-branch-basic.svg" /><p><strong>merge commit after</strong></p>
+<img alt="_images/git-branch-merge-commit-after.svg" src="_images/git-branch-merge-commit-after.svg" /><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code> will perform this merge type if <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> is not the immediate
+parent</p></li>
+<li><p>A new commit is created representing the Merge Commit</p></li>
+<li><p>You can force a merge commit even if a Fast-Forward commit is possible by
+explicitly passing <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span> <span class="pre">--no-ff</span></code></p></li>
+<li><p>Typically though avoid using merge commits in Pull Request branches as those
+branches are not yet merged</p></li>
+</ul>
+</div>
+<div class="section" id="rebasing-git-rebase">
+<h3><a class="toc-backref" href="#id20">Rebasing: git rebase</a><a class="headerlink" href="#rebasing-git-rebase" title="Permalink to this headline">¶</a></h3>
+<p>A rebase is kind of like a rewind and replay function in Git. It does 3 things:</p>
+<ol class="arabic simple">
+<li><p>It undoes all of your changes in the current branch up until the common
+parent of the declared branch</p></li>
+<li><p>Updates the current branch with the new changes from the declared branch</p></li>
+<li><p>Replays your changes ontop of the updated current branch</p></li>
+</ol>
+<p><strong>rebase before</strong></p>
+<img alt="_images/git-branch-rebase-before.svg" src="_images/git-branch-rebase-before.svg" /><p><strong>rebase after</strong></p>
+<img alt="_images/git-branch-rebase-after.svg" src="_images/git-branch-rebase-after.svg" /><p>Basically this kind of Git merge rewrites the history of the current branch so
+should not ever be done on production branches. On work in progress branches
+use rebase to make sure your work is based on the most current copy of the
+relevant branch.</p>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span> <span class="pre">-i</span> <span class="pre">origin/master</span></code> is a powerful tool to edit previous commits in
+a commit chain.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git rebase -i origin/master
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="merging-code-resolving-merge-conflicts">
+<h2><a class="toc-backref" href="#id11">Merging Code: Resolving merge conflicts</a><a class="headerlink" href="#merging-code-resolving-merge-conflicts" title="Permalink to this headline">¶</a></h2>
+<p>Inevitably when working with others we will run into merge conflicts. Merge
+conflicts happen when 2 commits modify the same file within 3 lines of each
+other.</p>
+<div class="section" id="a-simple-patch">
+<h3>A simple patch<a class="headerlink" href="#a-simple-patch" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gh">diff --git a/CONTRIBUTING.markdown b/CONTRIBUTING.markdown</span>
+<span class="gh">index cdfd6a61..9cf6b78a 100644</span>
+<span class="gd">--- a/CONTRIBUTING.markdown</span>
+<span class="gi">+++ b/CONTRIBUTING.markdown</span>
+<span class="gu">@@ -10,6 +10,8 @@ code review system and all contributions should be directed to there. Please</span>
+ refer to our documentation on [Submitting patches][3] for details on how to
+ submit code to this project.
+
+<span class="gi">+Hello World.</span>
+<span class="gi">+</span>
+ ## Reporting a Bug
+
+ OpenDaylight uses [Bugzilla][5] as our issue tracking system and any feature
+</pre></div>
+</div>
+</div>
+<div class="section" id="a-conflicting-patch">
+<h3>A conflicting patch<a class="headerlink" href="#a-conflicting-patch" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gh">diff --git a/CONTRIBUTING.markdown b/CONTRIBUTING.markdown</span>
+<span class="gh">index cdfd6a61..b8591bd0 100644</span>
+<span class="gd">--- a/CONTRIBUTING.markdown</span>
+<span class="gi">+++ b/CONTRIBUTING.markdown</span>
+<span class="gu">@@ -10,6 +10,8 @@ code review system and all contributions should be directed to there. Please</span>
+ refer to our documentation on [Submitting patches][3] for details on how to
+ submit code to this project.
+
+<span class="gi">+Conflicting patch!</span>
+<span class="gi">+</span>
+ ## Reporting a Bug
+
+ OpenDaylight uses [Bugzilla][5] as our issue tracking system and any feature
+</pre></div>
+</div>
+</div>
+<div class="section" id="git-merge-conflicting-patch">
+<h3>git merge conflicting patch<a class="headerlink" href="#git-merge-conflicting-patch" title="Permalink to this headline">¶</a></h3>
+<p>Here we merge patch-a into patch-b <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span> <span class="pre">patch-a</span></code>.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ git merge patch-a
+Auto-merging CONTRIBUTING.markdown
+CONFLICT (content): Merge conflict in CONTRIBUTING.markdown
+Automatic merge failed; fix conflicts and then commit the result.
+
+$ git status
+On branch patch-b
+Your branch is ahead of &#39;origin/master&#39; by 1 commit.
+  (use &quot;git push&quot; to publish your local commits)
+
+You have unmerged paths.
+  (fix conflicts and run &quot;git commit&quot;)
+  (use &quot;git merge --abort&quot; to abort the merge)
+
+Unmerged paths:
+  (use &quot;git add &lt;file&gt;...&quot; to mark resolution)
+    both modified:   CONTRIBUTING.markdown
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</pre></div>
+</div>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gh">diff --cc CONTRIBUTING.markdown</span>
+<span class="gh">index b8591bd0,9cf6b78a..00000000</span>
+<span class="gd">--- a/CONTRIBUTING.markdown</span>
+<span class="gi">+++ b/CONTRIBUTING.markdown</span>
+<span class="gu">@@@ -10,7 -10,7 +10,11 @@@ code review system and all contribution</span>
+  refer to our documentation on [Submitting patches][3] for details on how to
+  submit code to this project.
+
+<span class="gi">++&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span>
+ +Conflicting patch!
+<span class="gi">++=======</span>
+<span class="gi">+ Hello World.</span>
+<span class="gi">++&gt;&gt;&gt;&gt;&gt;&gt;&gt; patch-a</span>
+
+  ## Reporting a Bug
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span> <span class="pre">HEAD</span></code> is the current reference we are on</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">=======</span></code> separates the 2 changes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> <span class="pre">patch-a</span></code> is the reference that’s being merged in</p></li>
+</ul>
+<p>There are 3 possible outcomes when deciding to resolve a merge conflict:</p>
+<ol class="arabic simple">
+<li><p>Pick the change from <code class="docutils literal notranslate"><span class="pre">HEAD</span></code></p></li>
+<li><p>Pick the change from the reference being merged (<code class="docutils literal notranslate"><span class="pre">patch-a</span></code>)</p></li>
+<li><p>A combination of the 2</p></li>
+</ol>
+<p>Let’s say we want to go with option 3, we would need to rewrite the conflicting
+section and then remove the 3 markers from above.</p>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gh">diff --git a/CONTRIBUTING.markdown b/CONTRIBUTING.markdown</span>
+<span class="gh">index b8591bd0..7c74583e 100644</span>
+<span class="gd">--- a/CONTRIBUTING.markdown</span>
+<span class="gi">+++ b/CONTRIBUTING.markdown</span>
+<span class="gu">@@ -10,7 +10,7 @@ code review system and all contributions should be directed to there. Please</span>
+ refer to our documentation on [Submitting patches][3] for details on how to
+ submit code to this project.
+
+<span class="gd">-Conflicting patch!</span>
+<span class="gi">+Hello world. But I also like conflicting patches!</span>
+
+ ## Reporting a Bug
+</pre></div>
+</div>
+<p>The result of this is a <strong>Merge Commit</strong> with the resolved change. Use <code class="docutils literal notranslate"><span class="pre">gitk</span></code>
+to inspect the resulting commit timeline.</p>
+</div>
+<div class="section" id="git-rebase-conflicting-patch">
+<h3>git rebase conflicting patch<a class="headerlink" href="#git-rebase-conflicting-patch" title="Permalink to this headline">¶</a></h3>
+<p>Now we merge patch-a again into patch-b using <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span> <span class="pre">patch-a</span></code>.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ git rebase patch-a
+Auto-merging CONTRIBUTING.markdown
+CONFLICT (content): Merge conflict in CONTRIBUTING.markdown
+error: could not apply 12553a27... Patch B
+Resolve all conflicts manually, mark them as resolved with
+&quot;git add/rm &lt;conflicted_files&gt;&quot;, then run &quot;git rebase --continue&quot;.
+You can instead skip this commit: run &quot;git rebase --skip&quot;.
+To abort and get back to the state before &quot;git rebase&quot;, run &quot;git rebase --abort&quot;.
+Could not apply 12553a27... Patch B
+
+$ git status
+interactive rebase in progress; onto e85da853
+Last command done (1 command done):
+   pick 12553a27 Patch B
+No commands remaining.
+You are currently rebasing branch &#39;patch-b&#39; on &#39;e85da853&#39;.
+  (fix conflicts and then run &quot;git rebase --continue&quot;)
+  (use &quot;git rebase --skip&quot; to skip this patch)
+  (use &quot;git rebase --abort&quot; to check out the original branch)
+
+Unmerged paths:
+  (use &quot;git restore --staged &lt;file&gt;...&quot; to unstage)
+  (use &quot;git add &lt;file&gt;...&quot; to mark resolution)
+    both modified:   CONTRIBUTING.markdown
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</pre></div>
+</div>
+<div class="highlight-diff notranslate"><div class="highlight"><pre><span></span><span class="gh">diff --cc CONTRIBUTING.markdown</span>
+<span class="gh">index 9cf6b78a,b8591bd0..00000000</span>
+<span class="gd">--- a/CONTRIBUTING.markdown</span>
+<span class="gi">+++ b/CONTRIBUTING.markdown</span>
+<span class="gu">@@@ -10,7 -10,7 +10,11 @@@ code review system and all contribution</span>
+  refer to our documentation on [Submitting patches][3] for details on how to
+  submit code to this project.
+
+<span class="gi">++&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span>
+ +Hello World.
+<span class="gi">++=======</span>
+<span class="gi">+ Conflicting patch!</span>
+<span class="gi">++&gt;&gt;&gt;&gt;&gt;&gt;&gt; 12553a27... Patch B</span>
+
+  ## Reporting a Bug
+</pre></div>
+</div>
+<p>Pretty similar to the merge case except this time we see <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> is patch-a
+and <code class="docutils literal notranslate"><span class="pre">patch-b</span></code> is the one being merged in. This is because rebase undoes your
+work, pulls in the merge branch, and then replays your commits ontop.</p>
+<p>Once the conflict is resolved we can use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">[FILE]</span></code> and
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span> <span class="pre">--continue</span></code> to complete the rebase.</p>
+<p>The result of this is a new <strong>Patch B</strong> commit that contains the resolved
+change instead of a <strong>Merge Commit</strong>. Use <code class="docutils literal notranslate"><span class="pre">gitk</span></code> to inspect the commit
+timeline.</p>
+</div>
+<div class="section" id="how-to-avoid-merge-conficts">
+<h3>How to avoid merge conficts<a class="headerlink" href="#how-to-avoid-merge-conficts" title="Permalink to this headline">¶</a></h3>
+<p>Merge conflicts are inevitable if you are working with a team of people. You
+can reduce the chances of it happening though following a few rules:</p>
+<ul class="simple">
+<li><p>Do not work on the same files</p></li>
+<li><p>If you do work on the same files, do not work in the same section</p></li>
+</ul>
+<p>These points are not realistic in the real world however. So some better
+suggestions.</p>
+<ul class="simple">
+<li><p>Keep your commits on topic, do not make unnecessary and unrelated changes</p></li>
+<li><p>Keep your commits small, break your larger contributions into smaller logical
+commits</p></li>
+</ul>
+<p>This will reduce the chances of running into merge conflicts as well as makes
+it easier to resolve conflicts when they do occur.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Use a GUI merge tool could greatly simplify the merge resolution process.
+There’s many out there to pick from so try a few and decide which one you
+like.</p>
+</div>
+</div>
+</div>
+<div class="section" id="git-references-key-takeaways">
+<h2><a class="toc-backref" href="#id12">Git References: Key Takeaways</a><a class="headerlink" href="#git-references-key-takeaways" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">HEAD</span></code> is your <a class="reference internal" href="glossary.html#term-Worktree"><span class="xref std std-term">Worktree</span></a>’s current checkout</p></li>
+<li><p>Branches are references that automatically updates it’s reference point along
+with <code class="docutils literal notranslate"><span class="pre">HEAD</span></code></p></li>
+<li><p>Tags are static references</p></li>
+<li><p>Remotes track branches from a remote repository</p></li>
+<li><p>There are 3 types of merges: Fast-Forward, Merge-Commit, and Rebase</p></li>
+<li><p><strong>Merge Conflicts</strong> are inevitible, understanding merge order and how to
+resolve conflicts is valuable</p></li>
+<li><p>If you are about to do something you are unsure of, try it out on a test
+branch with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-b</span> <span class="pre">test-branch</span> <span class="pre">REFERENCE</span></code></p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="workflows.html" class="btn btn-neutral float-right" title="Git Workflows" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="remotes.html" class="btn btn-neutral float-left" title="Working with remotes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Thanh Ha
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-46385504-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>

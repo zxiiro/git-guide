@@ -1,0 +1,291 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Basic Revision Control &mdash; Git - a follow along guide  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://www.zxiiro.ca/git-guidebasic-revision-control.html"/>
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Git Core Concepts" href="core-concepts.html" />
+    <link rel="prev" title="Git, a follow along guide" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Git - a follow along guide
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Basic Revision Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core-concepts.html">Git Core Concepts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="core-concepts.html#the-git-repository">The Git Repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core-concepts.html#the-git-object-model">The Git Object Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core-concepts.html#demo-working-with-the-git-directory">Demo: Working with the Git Directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core-concepts.html#demo-working-with-multiple-worktrees">Demo: Working with multiple Worktrees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core-concepts.html#git-core-concepts-key-takeaways">Git Core Concepts: Key Takeaways</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="commit-objects.html">Deeper look into commits</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="commit-objects.html#writing-a-great-commit-message">Writing a great commit message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-objects.html#poor-man-s-automated-release-notes">Poor man’s automated release notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-objects.html#troubleshooting-and-debugging">Troubleshooting and debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-objects.html#tools-for-reading-commits">Tools for reading commits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-objects.html#demo-committing-and-amending">Demo: Committing and amending</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit-objects.html#commit-mesages-key-takeaways">Commit Mesages: Key Takeaways</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="remotes.html">Working with remotes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="remotes.html#refs-remotes-vs-refs-heads">refs/remotes vs refs/heads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remotes.html#git-remote-commands">Git Remote Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remotes.html#remotes-key-takeaways">Remotes: Key Takeaways</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="branch-tags.html">Git References: Branches and Tags</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="branch-tags.html#core-references">Core References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="branch-tags.html#accessing-references">Accessing References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="branch-tags.html#branch-and-tag-commands">Branch and Tag commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="branch-tags.html#merging-code-3-types-of-merges">Merging Code: 3 types of merges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="branch-tags.html#merging-code-resolving-merge-conflicts">Merging Code: Resolving merge conflicts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="branch-tags.html#git-references-key-takeaways">Git References: Key Takeaways</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="workflows.html">Git Workflows</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="workflows.html#email-workflow">Email Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workflows.html#pull-request-workflow">Pull Request Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workflows.html#patchset-workflow">Patchset Workflow</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Git - a follow along guide</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Basic Revision Control</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/basic-revision-control.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="core-concepts.html" class="btn btn-neutral float-right" title="Git Core Concepts" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Git, a follow along guide" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="basic-revision-control">
+<h1>Basic Revision Control<a class="headerlink" href="#basic-revision-control" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./archive
+./archive/2020-03-20-project.zip
+./archive/2020-04-16-project.zip
+./archive/2020-04-16-project-test-feature.zip
+./archive/2020-04-21-project.zip
+./archive/project-1.0.0.zip
+./archive/project-1.0.1.zip
+./archive/project-2.0.0.zip
+./src
+./src/project.py
+</pre></div>
+</div>
+<p>Early on in my development career I realized the usefulness of being able to
+go back in time and review old code I had written. At first I saw it was a way
+for me to go back and retest use cases that broke in newer updates of projects
+that I was working on. As I improved I also realized archiving old code
+allowed me to recall lessons that I’ve learned or grab snippets of code that
+I’ve developed before to reuse in a different project.</p>
+<p>Before I discovered that revision control tools existed, I relied on very
+basic tools in my workflow. Mainly <em>zip</em> and <em>notepad++</em> to archive and
+compare changes between my workspace and my archives.</p>
+<p>Workflow:</p>
+<ul class="simple">
+<li><p>Zip the project for every release (Tagging)</p></li>
+<li><p>Zip the project every day to record development progress</p></li>
+<li><p>Zip the project with a descriptor when testing out new features (branching)</p></li>
+<li><p>Unzip the archives to revert code back to a previous state</p></li>
+</ul>
+<p>These days you should use a tool like Git, but the basic nature of this is
+fairly similar to what Git is doing in the backend.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="core-concepts.html" class="btn btn-neutral float-right" title="Git Core Concepts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Git, a follow along guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Thanh Ha
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+    <!-- Theme Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-46385504-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+
+    
+   
+
+</body>
+</html>
