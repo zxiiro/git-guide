@@ -1,5 +1,5 @@
 Git Workflows
--------------
+=============
 
 In my experience with Git I have seen 3 types of workflows developers might
 use to collaborate on a project.
@@ -10,7 +10,11 @@ use to collaborate on a project.
 
 
 Email Workflow
-^^^^^^^^^^^^^^
+--------------
+
+.. figure:: img/git-workflow-email.svg
+
+   Workflow: Email
 
 This is the workflow utilized by the Linux Kernel project. Git was designed
 with email in mind.
@@ -29,6 +33,9 @@ The email workflow is also a really handy way to share work with colleagues
 without needing to setup any specific infrastructure or if you are stuck
 behind a firewall that's blocking your remote repos this can get around that.
 
+This workflow leaves it up to the committer decide how they want the patches
+merged via Merge Commit, or Fast-Forward, or Rebased, etc...
+
 Workflow Commands:
 
 .. contents::
@@ -37,7 +44,7 @@ Workflow Commands:
 
 
 git format-patch
-""""""""""""""""
+^^^^^^^^^^^^^^^^
 
 This command is used to create a ascii based ``*.patch`` files containing your
 commits. One commit per patch file and each patch file is in unix mailbox
@@ -79,7 +86,7 @@ With these patches you can attach them to an email and send it out to the team.
 
 
 git apply
-"""""""""
+^^^^^^^^^
 
 Git apply takes a ``*.patch`` file and applies the file changes to the repo.
 This command ignores any commit messages and metadata as it is only concerned
@@ -88,7 +95,7 @@ apply commit patches.
 
 
 git am
-""""""
+^^^^^^
 
 This command takes ``*.patch`` files in mailbox format and merges the commits
 to the current branch.
@@ -99,18 +106,23 @@ to the current branch.
 
 
 Pull Request Workflow
-^^^^^^^^^^^^^^^^^^^^^
+---------------------
+
+.. figure:: img/git-workflow-patchset.svg
+
+   Workfow: Pull Request
+
 
 The Pull Request (PR) Workflow was popularized by GitHub and is used in
 services such as BitBucket and GitLab as well.
 
 Typically in the PR Workflow we would work on a side-branch for the task at
-hand and push this side branch to a remote such as GitHub to share with the
-project.
+hand and push this side branch to a remote such as GitHub to share. Then inform
+the project where your branch is and tell them to review and merge your branch.
 
 Pros:
 
-* Most common workflow
+* Common workflow
 * Arguably easier workflow
 
 Cons:
@@ -146,9 +158,19 @@ Cons:
     git commit
     git push origin mybranch
 
+* You do not necessarily have to do it this way but it is the way GitHub
+  encourages
+* It is possible to also do the ``git commit --amend`` workflow and only
+  maintain a single commit but requires ``git push --force``
+
 
 Patchset Workflow
-^^^^^^^^^^^^^^^^^
+-----------------
+
+.. figure:: img/git-workflow-patchset.svg
+
+   Workflow: Patchset
+
 
 This workflow is what's used in Gerrit. In this workflow we are contributing
 a single commit as a **Patchset** for review. Updates to the code are done
@@ -196,7 +218,7 @@ equivalent to ``git push origin HEAD:refs/for/master``.
 If you are using *git-review* tool, the command ``git review -d 88734,1`` is
 equivalent to ``git fetch origin refs/changes/34/88734/1``.
 
-It is considered good practice to redownload your change every time you work
-on it in Gerrit because other team members could updaet your code since you
-last worked on it. If you are 100% sure you are the only one that's worked on
-it since last time you can skip the fetch component.
+It is good practice to redownload your change every time you work on it in
+Gerrit because other team members could updaet your code since you last worked
+on it. If you are 100% sure you are the only one that's worked on it since last
+time you can skip the fetch component.
