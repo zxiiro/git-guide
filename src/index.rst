@@ -21,7 +21,6 @@ newbies as well as veterans of Git.
 .. toctree::
     :maxdepth: 2
 
-    basic-revision-control
     core-concepts
     commit-objects
     remotes
