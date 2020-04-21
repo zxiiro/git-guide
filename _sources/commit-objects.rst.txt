@@ -278,8 +278,8 @@ Final tips on commit messages
   understand the hardships of a code reviewer if you are one yourself.
 
 
-Poor man's automated release notes
-----------------------------------
+Simple method for automated release notes
+-----------------------------------------
 
 To prove a point that well defined commit messages can be useful. One way to
 take advantage of a repo that follows the best practices is to automate
@@ -341,33 +341,6 @@ package:
 1. Summary of what changed since last release
 2. Credit to the author of the change
 3. A reference that can be used to get more details if necessary
-
-
-Troubleshooting and debugging
------------------------------
-
-Commit messages are also great for quickly troubleshooting an issue if some
-change broke our project in an unexpected way. If commit messages are well
-formed, developers can review the git log to quickly identify which changes
-may be related to the unexpected issue and narrow down the problem much more
-quickly.
-
-Referring back to the JJB project again, there was a case where a hotfix
-release had to be pushed out shortly after a major release. If we take a look
-at the difference between versions 2.2.0 to 2.2.1 we can see that the hotfix
-release reverted a particular commit:
-
-.. code-block:: bash
-
-    git log --no-merges --pretty=format:"%h %<(20) %an %s" 2.2.0..2.2.1
-
-    c33dbaaa  Thanh Ha             Revert "Allow dashes in variable key names"
-
-After some users started deploying version 2.2.0 we quickly discovered that
-folks using certain characters in their variable names. The original commit
-``b92336aa  Darragh Bailey       Allow dashes in variable key names`` was
-descriptive enough that allowed us to narrow down to this commit to identify
-the issue and revert and release a hotfix.
 
 
 Tools for reading commits
