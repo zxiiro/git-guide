@@ -371,8 +371,20 @@ cat .git/refs/heads/new-branch
 <div class="figure align-default" id="id4">
 <img alt="Branching" src="_images/git-branch-basic.svg" /><p class="caption"><span class="caption-text">Branching</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s1">&#39;a1b2c3&#39;</span> &gt; .git/refs/heads/new-branch
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-a</span></code> to list all available branches including remotes</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">[new-branch]</span> <span class="pre">[reference]</span></code> to create a new branch</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-b</span> <span class="pre">[new-branch]</span> <span class="pre">[reference]</span></code> to create a new branch and
+checkout the branch in 1 command</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git branch -a
+
+cp .git/refs/heads/master .git/refs/heads/copy-branch
+git branch -a
+
 git branch new-branch master
+git branch -a
+
 cat .git/HEAD
 cat .git/refs/heads/new-branch
 </pre></div>
@@ -397,6 +409,7 @@ git commit
 git status
 
 git rebase -i master
+<span class="c1"># Remove the commit we just made</span>
 git status
 
 git checkout master
@@ -748,7 +761,7 @@ can reduce the chances of it happening though following a few rules:</p>
 <li><p>If you do work on the same files, do not work in the same section</p></li>
 </ul>
 <p>These points are not realistic in the real world however. So some better
-suggestions.</p>
+suggestions to minimize the amount of merge conflicts.</p>
 <ul class="simple">
 <li><p>Keep your commits on topic, do not make unnecessary and unrelated changes</p></li>
 <li><p>Keep your commits small, break your larger contributions into smaller logical

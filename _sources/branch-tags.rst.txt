@@ -198,10 +198,21 @@ git branch
 
     Branching
 
+* Use ``git branch -a`` to list all available branches including remotes
+* Use ``git branch [new-branch] [reference]`` to create a new branch
+* Use ``git checkout -b [new-branch] [reference]`` to create a new branch and
+  checkout the branch in 1 command
+
 .. code-block:: bash
 
-    echo 'a1b2c3' > .git/refs/heads/new-branch
+    git branch -a
+
+    cp .git/refs/heads/master .git/refs/heads/copy-branch
+    git branch -a
+
     git branch new-branch master
+    git branch -a
+
     cat .git/HEAD
     cat .git/refs/heads/new-branch
 
@@ -230,6 +241,7 @@ This tells Git to make **new-branch** track the **master** branch for changes.
     git status
 
     git rebase -i master
+    # Remove the commit we just made
     git status
 
     git checkout master
@@ -649,7 +661,7 @@ can reduce the chances of it happening though following a few rules:
 * If you do work on the same files, do not work in the same section
 
 These points are not realistic in the real world however. So some better
-suggestions.
+suggestions to minimize the amount of merge conflicts.
 
 * Keep your commits on topic, do not make unnecessary and unrelated changes
 * Keep your commits small, break your larger contributions into smaller logical

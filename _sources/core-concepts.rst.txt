@@ -120,21 +120,27 @@ Contents:
     trigger CI.
 
 :info: Contains an ``excludes`` file which is similar to ``.gitignore``
-    except it is not saved in the Git repo. Useful if you want to ignore things
-    that are only significant to you and no one else (such as maybe you use a
-    different IDE then everyone else and don't want to pollute ``.gitignore``
-    with your snowflake environmnet). Otherwise it's better to use
-    ``.gitignore`` in most cases.
+    except it is not saved in the :term:`Git Database` so does not get shared
+    with others. Useful if you want to ignore things that are only significant
+    to you and no one else (such as maybe you use a different IDE then everyone
+    else and don't want to pollute ``.gitignore`` with your snowflake
+    environmnet). Otherwise it's better to use ``.gitignore`` in most cases.
 
 :objects: Contains the Git **object database** itself. It is a key-value store
-    and every single file you check into Git exists here. This is where Git
+    and every single file you commit into Git exists here. This is where Git
     pulls the files from when you do a ``git checkout``. Every file is a SHA
     hash that acts as the key and the contents of the file is the value in the
     key-value store.
 
-:refs: Contains all of your references, you might know them as branches,
-    tags, commits... They are essentially a bunch of SHA hashes that allow you
-    to pull from the Git object database.
+:refs: Contains all of your references, you might know them as branches and
+    tags.
+
+    * ``refs/heads/*`` is where all the branches are stored
+    * ``refs/tags/*`` is where all the tags are stored
+    * ``refs/remotes/[REMOTE]/*`` is where remote branches are stored
+
+    They are essentially a bunch of pointers to SHA hashes that allow you to
+    pull from the Git object database.
 
 
 The Git Object Model

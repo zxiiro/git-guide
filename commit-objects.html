@@ -650,12 +650,12 @@ gitk A B
 <h3><a class="toc-backref" href="#id16">History of specific path</a><a class="headerlink" href="#history-of-specific-path" title="Permalink to this headline">¶</a></h3>
 <p>Many Git commands support the ability to look up the history of specific paths.
 Whether it be a directory or individual files.</p>
-<ul class="simple">
-<li><p>gitk – README</p></li>
-<li><p>gitk – src/</p></li>
-<li><p>git diff – README</p></li>
-<li><p>git log – src/</p></li>
-</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gitk -- README
+gitk -- src/
+git diff -- README
+git log -- src/
+</pre></div>
+</div>
 <p>The <code class="docutils literal notranslate"><span class="pre">--</span></code> is necessary if you are looking for details on a path that was
 removed from current commits.</p>
 </div>

@@ -299,7 +299,7 @@ info
 </span><span class="hll">refs
 </span></pre></div>
 </div>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">HEAD</dt>
 <dd class="field-odd"><p>Contains the active reference point of your current workspace. This
 could be a SHA or a reference to another reference inside the <code class="docutils literal notranslate"><span class="pre">refs</span></code>
@@ -322,23 +322,29 @@ trigger CI.</p>
 </dd>
 <dt class="field-odd">info</dt>
 <dd class="field-odd"><p>Contains an <code class="docutils literal notranslate"><span class="pre">excludes</span></code> file which is similar to <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>
-except it is not saved in the Git repo. Useful if you want to ignore things
-that are only significant to you and no one else (such as maybe you use a
-different IDE then everyone else and don’t want to pollute <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>
-with your snowflake environmnet). Otherwise it’s better to use
-<code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> in most cases.</p>
+except it is not saved in the <a class="reference internal" href="glossary.html#term-Git-Database"><span class="xref std std-term">Git Database</span></a> so does not get shared
+with others. Useful if you want to ignore things that are only significant
+to you and no one else (such as maybe you use a different IDE then everyone
+else and don’t want to pollute <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> with your snowflake
+environmnet). Otherwise it’s better to use <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> in most cases.</p>
 </dd>
 <dt class="field-even">objects</dt>
 <dd class="field-even"><p>Contains the Git <strong>object database</strong> itself. It is a key-value store
-and every single file you check into Git exists here. This is where Git
+and every single file you commit into Git exists here. This is where Git
 pulls the files from when you do a <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span></code>. Every file is a SHA
 hash that acts as the key and the contents of the file is the value in the
 key-value store.</p>
 </dd>
 <dt class="field-odd">refs</dt>
-<dd class="field-odd"><p>Contains all of your references, you might know them as branches,
-tags, commits… They are essentially a bunch of SHA hashes that allow you
-to pull from the Git object database.</p>
+<dd class="field-odd"><p>Contains all of your references, you might know them as branches and
+tags.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">refs/heads/*</span></code> is where all the branches are stored</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">refs/tags/*</span></code> is where all the tags are stored</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">refs/remotes/[REMOTE]/*</span></code> is where remote branches are stored</p></li>
+</ul>
+<p>They are essentially a bunch of pointers to SHA hashes that allow you to
+pull from the Git object database.</p>
 </dd>
 </dl>
 </div>
