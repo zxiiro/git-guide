@@ -517,10 +517,12 @@ History of specific path
 Many Git commands support the ability to look up the history of specific paths.
 Whether it be a directory or individual files.
 
-* gitk -- README
-* gitk -- src/
-* git diff -- README
-* git log -- src/
+.. code-block:: bash
+
+    gitk -- README
+    gitk -- src/
+    git diff -- README
+    git log -- src/
 
 The ``--`` is necessary if you are looking for details on a path that was
 removed from current commits.

@@ -108,9 +108,9 @@ to the current branch.
 Pull Request Workflow
 ---------------------
 
-.. figure:: img/git-workflow-patchset.svg
+.. figure:: img/git-workflow-pull-request.svg
 
-   Workfow: Pull Request
+   Workflow: Pull Request
 
 
 The Pull Request (PR) Workflow was popularized by GitHub and is used in

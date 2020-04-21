@@ -28,22 +28,11 @@ even if they have the same name.
 * ``git checkout feature`` copies files from ``refs/heads/feature`` to your
   :term:`Worktree`
 * ``git checkout origin/feature`` copies files from
-  ``refs/heads/origin/feature`` to your :term:`Worktree`
+  ``refs/remotes/origin/feature`` to your :term:`Worktree`
 * If the local ``feature`` branch does not exist ``git checkout`` will try to
   interpret if any available remotes has the same reference branch name and
   creates a copy of that in ``refs/heads/feature`` and then copies the files
   to :term:`Worktree`
-
-Tracking branches
-^^^^^^^^^^^^^^^^^
-
-You can tell Git to have your branch track another branch which tells
-``git status`` to print additional information to you if your branch has
-diverged from the tracking branch. This is useful with remotes to track if we
-are missing changes in your local repo.
-
-Typically tracking branches are setup for same named branches of local and
-remote repositories.
 
 
 Commit timelines of remotes vs local
